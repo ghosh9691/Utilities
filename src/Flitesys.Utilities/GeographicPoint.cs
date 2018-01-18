@@ -5,7 +5,7 @@ using Flitesys.GeographicLib;
 
 namespace Flitesys.Utilities
 {
-    public struct GeographicPoint
+    public class GeographicPoint
     {
         public double Latitude;
         public double Longitude;
