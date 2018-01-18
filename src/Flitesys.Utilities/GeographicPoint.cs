@@ -16,6 +16,11 @@ namespace Flitesys.Utilities
             Longitude = lon;
         }
 
+		public GeographicPoint()
+		{
+
+		}
+
         public GeographicPoint(GeographicPoint another)
         {
             Latitude = another.Latitude;
