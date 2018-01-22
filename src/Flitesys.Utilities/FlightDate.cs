@@ -6,8 +6,24 @@ namespace Flitesys.Utilities
 {
     public class FlightDate
     {
-        public DateTime Date { get; set; }
-        public TimeZoneInfo TimeZone { get; set; }
+        private DateTime _date;
+        private TimeZoneInfo _timeZone;
+
+        public DateTime Local
+        {
+            get
+            {
+                return _date.ToLocalTime();
+            }
+        }
+
+        public DateTime Utc
+        {
+            get
+            {
+                return _date.ToUniversalTime();
+            }
+        }
 
         private FlightDate()
         {
@@ -15,14 +31,14 @@ namespace Flitesys.Utilities
 
         public FlightDate(DateTime dateTime, TimeZoneInfo tzi, DateTimeKind kind)
         {
-            this.Date = dateTime;
-            this.TimeZone = tzi;
+            this._date = dateTime;
+            this._timeZone = tzi;
         }
 
         public FlightDate(DateTime dateTime, TimeZoneInfo tzi)
         {
-            this.Date = dateTime;
-            this.TimeZone = tzi;
+            this._date = dateTime;
+            this._timeZone = tzi;
         }
     }
 }
