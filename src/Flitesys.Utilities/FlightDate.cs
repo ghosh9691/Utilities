@@ -6,8 +6,8 @@ namespace Flitesys.Utilities
 {
     public class FlightDate
     {
-        private DateTime _dateTime;
-        private TimeZoneInfo _timeZone;
+        public DateTime Date { get; set; }
+        public TimeZoneInfo TimeZone { get; set; }
 
         private FlightDate()
         {
@@ -15,14 +15,14 @@ namespace Flitesys.Utilities
 
         public FlightDate(DateTime dateTime, TimeZoneInfo tzi, DateTimeKind kind)
         {
-            this._dateTime = dateTime;
-            this._timeZone = tzi;
+            this.Date = dateTime;
+            this.TimeZone = tzi;
         }
 
         public FlightDate(DateTime dateTime, TimeZoneInfo tzi)
         {
-            this._dateTime = dateTime;
-            this._timeZone = tzi;
+            this.Date = dateTime;
+            this.TimeZone = tzi;
         }
     }
 }
