@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Flitesys.Utilities
+namespace Flitesys.Utilities.Enums
 {
     public enum WeightUnits
     {
