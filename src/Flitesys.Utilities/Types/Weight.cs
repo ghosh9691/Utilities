@@ -7,12 +7,17 @@ using System.Text;
 
 namespace Flitesys.Utilities.Types
 {
-    public struct Weight
+    public class Weight
     {
-        public double Value;
+        public double Value { get; set; }
 
 		[JsonConverter(typeof(StringEnumConverter))]
-        public WeightUnits Units;
+        public WeightUnits Units { get; set; }
+
+		public Weight()
+		{
+
+		}
 
         public Weight(double val, WeightUnits unit)
         {
