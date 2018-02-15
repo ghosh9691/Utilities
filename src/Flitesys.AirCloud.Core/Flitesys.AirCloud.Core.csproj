@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Flitesys</Authors>
+    <Company>Flitesys, LLC.</Company>
+    <Product>Flitesys AirCloud</Product>
+    <Description>Flitesys AirCloud Core Classes</Description>
+    <Copyright>(c) 2018 Flitesys, LLC. All Rights Reserved.</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.2" />
+  </ItemGroup>
+
+</Project>
