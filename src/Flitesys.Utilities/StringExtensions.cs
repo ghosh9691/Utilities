@@ -40,5 +40,15 @@ namespace Flitesys.Utilities
             byte[] decoded = Convert.FromBase64String(value);
             return Encoding.UTF8.GetString(decoded);
         }
+
+		public static bool IsEmpty(this string value)
+		{
+			return string.IsNullOrEmpty(value);
+		}
+
+		public static bool IsNotEmpty(this string value)
+		{
+			return !string.IsNullOrEmpty(value);
+		}
     }
 }
