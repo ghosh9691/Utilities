@@ -79,7 +79,7 @@ namespace Flitesys.Utilities
 
         public override string ToString()
         {
-            return $"{(GetYear() % 100).ToString("D2")}{GetOrdinal()}";
+            return $"{(GetYear() % 100).ToString("D2")}{GetOrdinal().ToString("D2")}";
         }
     }
 }
