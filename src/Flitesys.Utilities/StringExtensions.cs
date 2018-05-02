@@ -108,5 +108,21 @@ namespace Flitesys.Utilities
             var airac = new Airac(value);
             return airac.GetDiscontinueDate();
         }
+
+        public static int FromAiracElevation(this string value)
+        {
+            if (value.Length == 5)
+            {
+                try
+                {
+                    return Convert.ToInt32(value);
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+            return 0;
+        }
     }
 }
