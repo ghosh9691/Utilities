@@ -124,5 +124,26 @@ namespace Flitesys.Utilities
             }
             return 0;
         }
+
+        public static double FromMagneticVariation(this string value)
+        {
+            try
+            {
+                if (value.Length == 5)
+                {
+                    if (value[0] == 'T')
+                        return Convert.ToDouble(value.Substring(1, 4)) / 10.0;
+                    var magVar = Convert.ToDouble(value.Substring(1, 4)) / 10.0;
+                    if (value[0] == 'W')
+                        return -magVar;
+                    return magVar;
+                }
+                return 0.0;
+            }
+            catch (Exception)
+            {
+                return 0.0;
+            }
+        }
     }
 }
