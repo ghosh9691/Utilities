@@ -66,5 +66,20 @@ namespace Flitesys.Utilities
         {
             return _epoch.AddDays((_cycles + 1) * DurationPerCycle).Subtract(new TimeSpan(0, 0, 1));
         }
+
+        public int GetOrdinal()
+        {
+            return (GetEffectiveDate().DayOfYear - 1) / 28 + 1;
+        }
+
+        public int GetYear()
+        {
+            return GetEffectiveDate().Year;
+        }
+
+        public override string ToString()
+        {
+            return $"{(GetYear() % 100).ToString("D2")}{GetOrdinal()}";
+        }
     }
 }
