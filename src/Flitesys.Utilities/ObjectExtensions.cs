@@ -26,5 +26,17 @@ namespace Flitesys.Utilities
 			var serialized = JsonConvert.SerializeObject(source);
 			return JsonConvert.DeserializeObject<T>(serialized);
 		}
+
+        public static string ToJson(this object obj)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(obj);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
     }
 }

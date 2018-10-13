@@ -24,5 +24,15 @@ namespace Flitesys.Utilities.Tests
             Assert.False(isNull.IsNotNull());
             Assert.True(isNotNull.IsNotNull());
         }
+
+        [Fact]
+        public void ObjectToJson()
+        {
+            string json = (new object()).ToJson();
+            Assert.True(json.IsNotEmpty());
+            json = (new GeographicPoint()).ToJson();
+            Assert.True(json.IsNotEmpty());
+            Assert.Contains("Latitude", json);
+        }
     }
 }
