@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Flitesys.AirCloud.Core.Middleware.RequestId

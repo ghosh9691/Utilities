@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Flitesys.GeographicLib;
+﻿using Flitesys.GeographicLib;
 
 namespace Flitesys.Utilities
 {
@@ -16,10 +13,9 @@ namespace Flitesys.Utilities
             Longitude = lon;
         }
 
-		public GeographicPoint()
-		{
-
-		}
+        public GeographicPoint()
+        {
+        }
 
         public GeographicPoint(GeographicPoint another)
         {

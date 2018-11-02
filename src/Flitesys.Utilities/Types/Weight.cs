@@ -1,9 +1,6 @@
 ﻿using Flitesys.Utilities.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Flitesys.Utilities.Types
 {
@@ -11,13 +8,12 @@ namespace Flitesys.Utilities.Types
     {
         public double Value { get; set; }
 
-		[JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WeightUnits Units { get; set; }
 
-		public Weight()
-		{
-
-		}
+        public Weight()
+        {
+        }
 
         public Weight(double val, WeightUnits unit)
         {

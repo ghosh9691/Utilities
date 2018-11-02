@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Flitesys.AirCloud.Core.Middleware.RequestId
+﻿namespace Flitesys.AirCloud.Core.Middleware.RequestId
 {
     public class RequestIdOptions
     {
