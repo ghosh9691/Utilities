@@ -4,16 +4,6 @@ namespace Flitesys.Utilities
 {
     public static class ObjectExtensions
     {
-        public static bool IsNull(this object obj)
-        {
-            return obj == null;
-        }
-
-        public static bool IsNotNull(this object obj)
-        {
-            return obj != null;
-        }
-
         /// <summary>
         /// Clone an object. The object has to be Json serializable
         /// </summary>
@@ -24,6 +14,28 @@ namespace Flitesys.Utilities
         {
             var serialized = JsonConvert.SerializeObject(source);
             return JsonConvert.DeserializeObject<T>(serialized);
+        }
+
+        public static bool IsNotNull(this object obj)
+        {
+            return obj != null;
+        }
+
+        public static bool IsNull(this object obj)
+        {
+            return obj == null;
+        }
+
+        public static string ToJson(this object obj)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(obj);
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }
