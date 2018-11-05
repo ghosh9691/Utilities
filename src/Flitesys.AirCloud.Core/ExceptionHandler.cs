@@ -8,7 +8,7 @@ namespace Flitesys.AirCloud.Core
 {
     public class ExceptionHandler
     {
-        private static RequestDelegate ExceptionResponseHandler()
+        public static RequestDelegate ExceptionResponseHandler()
         {
             return async context =>
             {
