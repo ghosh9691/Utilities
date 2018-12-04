@@ -1,4 +1,4 @@
-﻿namespace Flitesys.AirCloud.Core
+﻿namespace PyxisInt.AirCloud.Core
 {
     public interface IRequestContextAdapter
     {

@@ -1,16 +1,11 @@
-﻿using Flitesys.Utilities.Enums;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using PyxisInt.Utilities.Enums;
 
-namespace Flitesys.Utilities.Types
+namespace PyxisInt.Utilities.Types
 {
     public class Weight
     {
-        public double Value { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public WeightUnits Units { get; set; }
-
         public Weight()
         {
         }
@@ -20,5 +15,10 @@ namespace Flitesys.Utilities.Types
             this.Value = val;
             this.Units = unit;
         }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public WeightUnits Units { get; set; }
+
+        public double Value { get; set; }
     }
 }

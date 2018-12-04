@@ -1,6 +1,6 @@
 ﻿using Flitesys.GeographicLib;
 
-namespace Flitesys.Utilities
+namespace PyxisInt.Utilities
 {
     public class GeographicPoint
     {
@@ -23,6 +23,16 @@ namespace Flitesys.Utilities
             Longitude = another.Longitude;
         }
 
+        public GeographicPoint DestinationPoint(double course, double distance)
+        {
+            GeodesicData g = Geodesic.WGS84.Direct(this.Latitude, this.Longitude, course, distance);
+            return new GeographicPoint
+            {
+                Latitude = g.Latitude2,
+                Longitude = g.Longitude2
+            };
+        }
+
         /// <summary>
         /// Computes the distance, initial course and final course from this point to another point
         /// </summary>
@@ -36,16 +46,6 @@ namespace Flitesys.Utilities
                 Distance = g.Distance,
                 InitialCourse = g.InitialAzimuth < 0 ? 360.0 + g.InitialAzimuth : g.InitialAzimuth,
                 FinalCourse = g.FinalAzimuth < 0 ? 360.0 + g.FinalAzimuth : g.FinalAzimuth
-            };
-        }
-
-        public GeographicPoint DestinationPoint(double course, double distance)
-        {
-            GeodesicData g = Geodesic.WGS84.Direct(this.Latitude, this.Longitude, course, distance);
-            return new GeographicPoint
-            {
-                Latitude = g.Latitude2,
-                Longitude = g.Longitude2
             };
         }
     }

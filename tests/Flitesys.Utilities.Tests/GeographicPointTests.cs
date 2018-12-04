@@ -1,24 +1,10 @@
 ﻿using System;
 using Xunit;
 
-namespace Flitesys.Utilities.Tests
+namespace PyxisInt.Utilities.Tests
 {
     public class GeographicPointTests
     {
-        [Fact]
-        public void TestJFKToLHR()
-        {
-            GeographicPoint jfk = new GeographicPoint(40.639801, -73.7789002);
-            GeographicPoint lhr = new GeographicPoint(51.4706001, -0.461941);
-
-            GeographicResult result = jfk.DistanceTo(lhr);
-            Assert.NotNull(result);
-            double expectedDistance = 5554539.949;
-            Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
-            double expectedInitialCourse = 51.381;
-            Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
-        }
-
         [Fact]
         public void TestAntiPodalPoints()
         {
@@ -34,6 +20,28 @@ namespace Flitesys.Utilities.Tests
         }
 
         [Fact]
+        public void TestDirect()
+        {
+            GeographicPoint jfk = new GeographicPoint(40.639801, -73.7789002);
+            GeographicPoint result = jfk.DestinationPoint(51.381, 5554539.949);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void TestJFKToLHR()
+        {
+            GeographicPoint jfk = new GeographicPoint(40.639801, -73.7789002);
+            GeographicPoint lhr = new GeographicPoint(51.4706001, -0.461941);
+
+            GeographicResult result = jfk.DistanceTo(lhr);
+            Assert.NotNull(result);
+            double expectedDistance = 5554539.949;
+            Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
+            double expectedInitialCourse = 51.381;
+            Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
+        }
+
+        [Fact]
         public void TestLHRToSYD()
         {
             GeographicPoint lhr = new GeographicPoint(51.4706001, -0.461941);
@@ -45,14 +53,6 @@ namespace Flitesys.Utilities.Tests
             Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
             double expectedInitialCourse = 60.115;
             Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
-        }
-
-        [Fact]
-        public void TestDirect()
-        {
-            GeographicPoint jfk = new GeographicPoint(40.639801, -73.7789002);
-            GeographicPoint result = jfk.DestinationPoint(51.381, 5554539.949);
-            Assert.NotNull(result);
         }
     }
 }

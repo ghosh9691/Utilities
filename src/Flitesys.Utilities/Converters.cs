@@ -1,4 +1,4 @@
-﻿namespace Flitesys.Utilities
+﻿namespace PyxisInt.Utilities
 {
     public class Converters
     {

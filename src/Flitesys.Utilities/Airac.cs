@@ -1,16 +1,12 @@
 ﻿using System;
 
-namespace Flitesys.Utilities
+namespace PyxisInt.Utilities
 {
     public class Airac
     {
-        private DateTime _epoch = new DateTime(2010, 1, 14, 2, 0, 0, DateTimeKind.Utc);
-        private int _cycles;
         private const int DurationPerCycle = 28;
-
-        private Airac()
-        {
-        }
+        private int _cycles;
+        private DateTime _epoch = new DateTime(2010, 1, 14, 2, 0, 0, DateTimeKind.Utc);
 
         public Airac(int cycles)
         {
@@ -37,6 +33,35 @@ namespace Flitesys.Utilities
             _cycles = lastOfPreviousYear._cycles + cycle;
         }
 
+        private Airac()
+        {
+        }
+
+        public DateTime GetDiscontinueDate()
+        {
+            return _epoch.AddDays((_cycles + 1) * DurationPerCycle).Subtract(new TimeSpan(0, 0, 1));
+        }
+
+        public DateTime GetEffectiveDate()
+        {
+            return _epoch.AddDays(_cycles * DurationPerCycle);
+        }
+
+        public int GetOrdinal()
+        {
+            return (GetEffectiveDate().DayOfYear - 1) / 28 + 1;
+        }
+
+        public int GetYear()
+        {
+            return GetEffectiveDate().Year;
+        }
+
+        public override string ToString()
+        {
+            return $"{(GetYear() % 100).ToString("D2")}{GetOrdinal().ToString("D2")}";
+        }
+
         private bool Validate(string airacCycle)
         {
             if (airacCycle.Length != 4)
@@ -53,31 +78,6 @@ namespace Flitesys.Utilities
             if ((cycle <= 0) || (cycle > 14))
                 return false;
             return true;
-        }
-
-        public DateTime GetEffectiveDate()
-        {
-            return _epoch.AddDays(_cycles * DurationPerCycle);
-        }
-
-        public DateTime GetDiscontinueDate()
-        {
-            return _epoch.AddDays((_cycles + 1) * DurationPerCycle).Subtract(new TimeSpan(0, 0, 1));
-        }
-
-        public int GetOrdinal()
-        {
-            return (GetEffectiveDate().DayOfYear - 1) / 28 + 1;
-        }
-
-        public int GetYear()
-        {
-            return GetEffectiveDate().Year;
-        }
-
-        public override string ToString()
-        {
-            return $"{(GetYear() % 100).ToString("D2")}{GetOrdinal().ToString("D2")}";
         }
     }
 }

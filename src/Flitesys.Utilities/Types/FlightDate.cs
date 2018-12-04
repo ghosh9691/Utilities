@@ -3,7 +3,7 @@ using NodaTime.Extensions;
 using System;
 using System.Collections.Generic;
 
-namespace Flitesys.Utilities.Types
+namespace PyxisInt.Utilities.Types
 {
     /// <summary>
     /// FlightDate refers to the date &amp; time a flight departs. It can be used where ever a
@@ -13,6 +13,22 @@ namespace Flitesys.Utilities.Types
     {
         private DateTime _dateTime;
         private DateTimeZone _timeZone;
+
+        public FlightDate()
+        {
+        }
+
+        public FlightDate(int year, int month, int day, int hour, int minute, string timeZone)
+        {
+            _dateTime = new DateTime(year, month, day, hour, minute, 0);
+            _timeZone = DateTimeZoneProviders.Tzdb.GetZoneOrNull(timeZone);
+        }
+
+        public FlightDate(DateTime dateTime, string timeZone)
+        {
+            _dateTime = dateTime;
+            _timeZone = DateTimeZoneProviders.Tzdb.GetZoneOrNull(timeZone);
+        }
 
         public DateTime DateTime
         {
@@ -32,20 +48,38 @@ namespace Flitesys.Utilities.Types
             set { SetTimeZone(value); }
         }
 
-        public FlightDate()
+        public static List<string> GetTimeZones()
         {
+            List<string> timeZones = new List<string>();
+            foreach (DateTimeZone dtz in DateTimeZoneProviders.Tzdb.GetAllZones())
+            {
+                timeZones.Add(dtz.Id);
+            }
+            return timeZones;
         }
 
-        public FlightDate(int year, int month, int day, int hour, int minute, string timeZone)
+        public override bool Equals(object obj)
         {
-            _dateTime = new DateTime(year, month, day, hour, minute, 0);
-            _timeZone = DateTimeZoneProviders.Tzdb.GetZoneOrNull(timeZone);
+            FlightDate target = obj as FlightDate;
+            if (target.IsNull())
+                return false;
+            DateTime thisInUtc = ToUtc();
+            DateTime targetUtc = target.ToUtc();
+            return (thisInUtc == targetUtc);
         }
 
-        public FlightDate(DateTime dateTime, string timeZone)
+        public bool IsGreaterThan(FlightDate target)
         {
-            _dateTime = dateTime;
-            _timeZone = DateTimeZoneProviders.Tzdb.GetZoneOrNull(timeZone);
+            DateTime thisInUtc = ToUtc();
+            DateTime targetUtc = target.ToUtc();
+            return (thisInUtc > targetUtc);
+        }
+
+        public bool IsLessThan(FlightDate target)
+        {
+            DateTime thisInUtc = ToUtc();
+            DateTime targetUtc = target.ToUtc();
+            return (thisInUtc < targetUtc);
         }
 
         public DateTime ToLocal(string targetZone)
@@ -81,16 +115,6 @@ namespace Flitesys.Utilities.Types
             return DateTimeOffset.MinValue.DateTime;
         }
 
-        public static List<string> GetTimeZones()
-        {
-            List<string> timeZones = new List<string>();
-            foreach (DateTimeZone dtz in DateTimeZoneProviders.Tzdb.GetAllZones())
-            {
-                timeZones.Add(dtz.Id);
-            }
-            return timeZones;
-        }
-
         private DateTime GetDateTime()
         {
             if ((_dateTime.IsNotNull()) && (_timeZone.IsNotNull()))
@@ -110,30 +134,6 @@ namespace Flitesys.Utilities.Types
         private void SetTimeZone(string value)
         {
             _timeZone = DateTimeZoneProviders.Tzdb.GetZoneOrNull(value);
-        }
-
-        public override bool Equals(object obj)
-        {
-            FlightDate target = obj as FlightDate;
-            if (target.IsNull())
-                return false;
-            DateTime thisInUtc = ToUtc();
-            DateTime targetUtc = target.ToUtc();
-            return (thisInUtc == targetUtc);
-        }
-
-        public bool IsLessThan(FlightDate target)
-        {
-            DateTime thisInUtc = ToUtc();
-            DateTime targetUtc = target.ToUtc();
-            return (thisInUtc < targetUtc);
-        }
-
-        public bool IsGreaterThan(FlightDate target)
-        {
-            DateTime thisInUtc = ToUtc();
-            DateTime targetUtc = target.ToUtc();
-            return (thisInUtc > targetUtc);
         }
     }
 }

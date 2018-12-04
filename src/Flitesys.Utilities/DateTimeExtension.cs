@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Flitesys.Utilities
+namespace PyxisInt.Utilities
 {
     public static class DateTimeExtension
     {

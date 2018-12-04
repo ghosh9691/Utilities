@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Flitesys.Utilities
+namespace PyxisInt.Utilities
 {
     public static class ObjectExtensions
     {

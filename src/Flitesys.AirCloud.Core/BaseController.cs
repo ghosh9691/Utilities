@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Flitesys.AirCloud.Core
+namespace PyxisInt.AirCloud.Core
 {
     public class BaseController : Controller
     {

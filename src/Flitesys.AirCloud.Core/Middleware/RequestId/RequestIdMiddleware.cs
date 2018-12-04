@@ -4,7 +4,7 @@ using Microsoft.Extensions.Primitives;
 using System;
 using System.Threading.Tasks;
 
-namespace Flitesys.AirCloud.Core.Middleware.RequestId
+namespace PyxisInt.AirCloud.Core.Middleware.RequestId
 {
     public class RequestIdMiddleware
     {

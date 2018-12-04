@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Flitesys.Utilities.Tests
+namespace PyxisInt.Utilities.Tests
 {
     public class StringExtensionsTests
     {
@@ -24,19 +24,19 @@ namespace Flitesys.Utilities.Tests
         }
 
         [Fact]
-        public void TestFromAiracLongitudeWesternHemisphere()
+        public void TestFromAiracLongitudeEasternHemisphere()
         {
-            double expected = -73.778925;
-            var testLat = "W073464413";
+            double expected = 73.778925;
+            var testLat = "E073464413";
             var result = testLat.FromAiracLongitude();
             Assert.True(Math.Abs(result - expected) <= 0.000001);
         }
 
         [Fact]
-        public void TestFromAiracLongitudeEasternHemisphere()
+        public void TestFromAiracLongitudeWesternHemisphere()
         {
-            double expected = 73.778925;
-            var testLat = "E073464413";
+            double expected = -73.778925;
+            var testLat = "W073464413";
             var result = testLat.FromAiracLongitude();
             Assert.True(Math.Abs(result - expected) <= 0.000001);
         }

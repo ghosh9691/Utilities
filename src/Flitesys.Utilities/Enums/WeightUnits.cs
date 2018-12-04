@@ -1,4 +1,4 @@
-﻿namespace Flitesys.Utilities.Enums
+﻿namespace PyxisInt.Utilities.Enums
 {
     public enum WeightUnits
     {

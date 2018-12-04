@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 
-namespace Flitesys.AirCloud.Core
+namespace PyxisInt.AirCloud.Core
 {
     public class RequestContextAdapter : IRequestContextAdapter
     {

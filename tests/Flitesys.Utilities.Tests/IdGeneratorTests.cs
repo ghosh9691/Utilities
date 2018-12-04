@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Flitesys.Utilities.Tests
+namespace PyxisInt.Utilities.Tests
 {
     public class IdGeneratorTests
     {

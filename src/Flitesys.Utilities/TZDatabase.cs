@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Flitesys.Utilities
+namespace PyxisInt.Utilities
 {
     public static class TZDatabase
     {

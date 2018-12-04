@@ -2,52 +2,36 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Flitesys.Utilities
+namespace PyxisInt.Utilities
 {
     public static class StringExtensions
     {
-        public static string GetHash(this string value)
+        public static DateTime AiracDiscontinueDate(this string value)
         {
-            using (var sha = SHA256.Create())
+            var airac = new Airac(value);
+            return airac.GetDiscontinueDate();
+        }
+
+        public static DateTime AiracEffectiveDate(this string value)
+        {
+            var airac = new Airac(value);
+            return airac.GetEffectiveDate();
+        }
+
+        public static int FromAiracElevation(this string value)
+        {
+            if (value.Length == 5)
             {
-                byte[] hashed = sha.ComputeHash(Encoding.UTF8.GetBytes(value));
-                return BitConverter.ToString(hashed).Replace("-", "");
+                try
+                {
+                    return Convert.ToInt32(value);
+                }
+                catch
+                {
+                    return 0;
+                }
             }
-        }
-
-        public static string GetHash(this string value, string salt)
-        {
-            using (var sha = SHA256.Create())
-            {
-                byte[] hashed = sha.ComputeHash(Encoding.UTF8.GetBytes(value + salt));
-                return BitConverter.ToString(hashed).Replace("-", "");
-            }
-        }
-
-        public static string ToBase64(this string value)
-        {
-            byte[] bytesToEncode = Encoding.UTF8.GetBytes(value);
-            return Convert.ToBase64String(bytesToEncode);
-        }
-
-        public static string FromBase64(this string value)
-        {
-            while ((value.Length % 4) != 0)
-            {
-                value += "=";
-            }
-            byte[] decoded = Convert.FromBase64String(value);
-            return Encoding.UTF8.GetString(decoded);
-        }
-
-        public static bool IsEmpty(this string value)
-        {
-            return string.IsNullOrEmpty(value);
-        }
-
-        public static bool IsNotEmpty(this string value)
-        {
-            return !string.IsNullOrEmpty(value);
+            return 0;
         }
 
         public static double FromAiracLatitude(this string value)
@@ -96,32 +80,14 @@ namespace Flitesys.Utilities
             }
         }
 
-        public static DateTime AiracEffectiveDate(this string value)
+        public static string FromBase64(this string value)
         {
-            var airac = new Airac(value);
-            return airac.GetEffectiveDate();
-        }
-
-        public static DateTime AiracDiscontinueDate(this string value)
-        {
-            var airac = new Airac(value);
-            return airac.GetDiscontinueDate();
-        }
-
-        public static int FromAiracElevation(this string value)
-        {
-            if (value.Length == 5)
+            while ((value.Length % 4) != 0)
             {
-                try
-                {
-                    return Convert.ToInt32(value);
-                }
-                catch
-                {
-                    return 0;
-                }
+                value += "=";
             }
-            return 0;
+            byte[] decoded = Convert.FromBase64String(value);
+            return Encoding.UTF8.GetString(decoded);
         }
 
         public static double FromMagneticVariation(this string value)
@@ -143,6 +109,40 @@ namespace Flitesys.Utilities
             {
                 return 0.0;
             }
+        }
+
+        public static string GetHash(this string value)
+        {
+            using (var sha = SHA256.Create())
+            {
+                byte[] hashed = sha.ComputeHash(Encoding.UTF8.GetBytes(value));
+                return BitConverter.ToString(hashed).Replace("-", "");
+            }
+        }
+
+        public static string GetHash(this string value, string salt)
+        {
+            using (var sha = SHA256.Create())
+            {
+                byte[] hashed = sha.ComputeHash(Encoding.UTF8.GetBytes(value + salt));
+                return BitConverter.ToString(hashed).Replace("-", "");
+            }
+        }
+
+        public static bool IsEmpty(this string value)
+        {
+            return string.IsNullOrEmpty(value);
+        }
+
+        public static bool IsNotEmpty(this string value)
+        {
+            return !string.IsNullOrEmpty(value);
+        }
+
+        public static string ToBase64(this string value)
+        {
+            byte[] bytesToEncode = Encoding.UTF8.GetBytes(value);
+            return Convert.ToBase64String(bytesToEncode);
         }
     }
 }

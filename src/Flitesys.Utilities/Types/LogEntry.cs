@@ -1,4 +1,4 @@
-﻿namespace Flitesys.Utilities.Types
+﻿namespace PyxisInt.Utilities.Types
 {
     public class LogEntry
     {

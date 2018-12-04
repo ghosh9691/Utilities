@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Cryptography;
 
-namespace Flitesys.Utilities
+namespace PyxisInt.Utilities
 {
     public class IdGenerator
     {
@@ -17,6 +17,16 @@ namespace Flitesys.Utilities
             return RandomString(length, allowedCharacters);
         }
 
+        private static byte RandomByte()
+        {
+            using (var randomizer = RandomNumberGenerator.Create())
+            {
+                var randomBytes = new byte[1];
+                randomizer.GetBytes(randomBytes);
+                return randomBytes.Single();
+            }
+        }
+
         private static string RandomString(int length, string alphabet)
         {
             var outOfRange = byte.MaxValue + 1 - (byte.MaxValue + 1) % alphabet.Length;
@@ -29,16 +39,6 @@ namespace Flitesys.Utilities
                 .Take(length)
                 .Select(randomByte => alphabet[randomByte % alphabet.Length])
                 );
-        }
-
-        private static byte RandomByte()
-        {
-            using (var randomizer = RandomNumberGenerator.Create())
-            {
-                var randomBytes = new byte[1];
-                randomizer.GetBytes(randomBytes);
-                return randomBytes.Single();
-            }
         }
     }
 }

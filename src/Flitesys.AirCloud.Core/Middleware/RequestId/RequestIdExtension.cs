@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using System;
 
-namespace Flitesys.AirCloud.Core.Middleware.RequestId
+namespace PyxisInt.AirCloud.Core.Middleware.RequestId
 {
     public static class RequestIdExtension
     {
