@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Flitesys.Utilities\PyxisInt.Utilities.csproj" />
+    <ProjectReference Include="..\..\src\PyxisInt.Utilities\PyxisInt.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
