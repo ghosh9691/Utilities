@@ -23,6 +23,7 @@ namespace PyxisInt.AirCloud.Models.Identity
         public string UserName { get; set; }
 
         [JsonProperty("password")]
+        [JsonIgnore]
         public string Password { get; set; }
 
         [JsonProperty("firstName")]
@@ -49,12 +50,15 @@ namespace PyxisInt.AirCloud.Models.Identity
         public Roles Role { get; set; }
 
         [JsonProperty("created")]
+        [JsonIgnore]
         public DateTime Created { get; set; }
 
         [JsonProperty("lastModified")]
+        [JsonIgnore]
         public DateTime LastModified { get; set; }
 
         [JsonProperty("lastLogin")]
+        [JsonIgnore]
         public DateTime LastLogin { get; set; }
     }
 }
