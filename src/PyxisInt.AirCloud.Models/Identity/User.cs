@@ -23,8 +23,7 @@ namespace PyxisInt.AirCloud.Models.Identity
         public string UserName { get; set; }
 
         [JsonProperty("password")]
-        [JsonIgnore]
-        public string Password { get; set; }
+        public string Password { internal get; set; }
 
         [JsonProperty("firstName")]
         [StringLength(50)]
@@ -60,5 +59,10 @@ namespace PyxisInt.AirCloud.Models.Identity
         [JsonProperty("lastLogin")]
         [JsonIgnore]
         public DateTime LastLogin { get; set; }
+
+        public bool ShouldSerializePassword()
+        {
+            return false;
+        }
     }
 }
