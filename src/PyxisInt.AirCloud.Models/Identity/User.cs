@@ -41,8 +41,8 @@ namespace PyxisInt.AirCloud.Models.Identity
         [StringLength(128)]
         public string Email { get; set; }
 
-        [JsonProperty("allowedAirlines")]
-        public List<string> AllowedAirlines { get; set; }
+        [JsonProperty("airline")]
+        public string Airline { get; set; }
 
         [JsonProperty("role")]
         [JsonConverter(typeof(StringEnumConverter))]
