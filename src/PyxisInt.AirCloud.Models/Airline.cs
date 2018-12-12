@@ -42,5 +42,8 @@ namespace PyxisInt.AirCloud.Models
         [Required]
         [JsonProperty("discontinue")]
         public DateTime Discontinue { get; set; }
+
+        [JsonProperty("parent")]
+        public Airline Parent { get; set; }
     }
 }
