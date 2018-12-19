@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -51,6 +52,25 @@ namespace PyxisInt.AirCloud.Models.Navigation
 
         [JsonIgnore]
         public List<string> Airlines { get; set; }
+
+        [JsonProperty("airacCycle")]
+        [Required]
+        [StringLength(4, MinimumLength = 4)]
+        public string AiracCycle { get; set; }
+
+        [JsonProperty("effective")]
+        [Required]
+        public DateTime Effective { get; set; }
+
+        [JsonProperty("discontinue")]
+        [Required]
+        public DateTime Discontinue { get; set; }
+
+        [JsonIgnore]
+        public DateTime Created { get; set; }
+
+        [JsonIgnore]
+        public DateTime LastModified { get; set; }
 
         public Airport()
         {
