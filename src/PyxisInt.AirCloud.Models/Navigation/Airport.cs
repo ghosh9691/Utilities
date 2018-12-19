@@ -40,7 +40,7 @@ namespace PyxisInt.AirCloud.Models.Navigation
 
         [JsonProperty("magneticVariation")]
         [Required]
-        public double MagneticVariation { get; set }
+        public double MagneticVariation { get; set; }
 
         [JsonProperty("elevation")]
         [Required]
