@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PyxisInt.AirCloud.Models.Enums;
 using System;
@@ -12,10 +10,10 @@ namespace PyxisInt.AirCloud.Models.Identity
 {
     public class User
     {
-        [BsonId]
+        [Key]
         [JsonProperty("id")]
         [Required]
-        public ObjectId Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(20)]

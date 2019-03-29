@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,8 +7,10 @@ namespace PyxisInt.AirCloud.Models.Navigation
 {
     public class Airport
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
+        [Key]
+        [JsonProperty("id")]
+        [Required]
+        public Guid Id { get; set; }
 
         [JsonProperty("icao")]
         [Required]

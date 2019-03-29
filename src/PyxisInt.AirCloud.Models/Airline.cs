@@ -1,17 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
 namespace PyxisInt.AirCloud.Models
 {
     public class Airline
     {
-        [BsonId]
+        [Key]
         [Required]
         [JsonProperty("id")]
-        public ObjectId Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(3, MinimumLength = 3)]
