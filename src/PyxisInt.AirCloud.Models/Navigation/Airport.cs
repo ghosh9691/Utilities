@@ -50,8 +50,6 @@ namespace PyxisInt.AirCloud.Models.Navigation
         [JsonProperty("longestRunway")]
         public int? LongestRunway { get; set; }
 
-        [JsonIgnore]
-        public List<string> Airlines { get; set; }
 
         [JsonProperty("airacCycle")]
         [Required]
@@ -74,7 +72,6 @@ namespace PyxisInt.AirCloud.Models.Navigation
 
         public Airport()
         {
-            Airlines = new List<string>();
         }
     }
 }
