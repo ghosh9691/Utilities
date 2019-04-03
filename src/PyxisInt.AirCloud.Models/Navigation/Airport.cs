@@ -70,6 +70,9 @@ namespace PyxisInt.AirCloud.Models.Navigation
         [JsonIgnore]
         public DateTime LastModified { get; set; }
 
+        [JsonIgnore]
+        public virtual ICollection<Airline> Airlines { get; set; }
+
         public Airport()
         {
         }
