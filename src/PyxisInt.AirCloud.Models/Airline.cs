@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using PyxisInt.AirCloud.Models.Navigation;
 
 namespace PyxisInt.AirCloud.Models
 {
@@ -46,5 +48,8 @@ namespace PyxisInt.AirCloud.Models
 
         [JsonIgnore]
         public DateTime LastModified { get; set; }
+
+        [JsonIgnore]
+        public List<Airport> Airports { get; set; }
     }
 }
