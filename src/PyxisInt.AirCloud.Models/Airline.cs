@@ -49,7 +49,5 @@ namespace PyxisInt.AirCloud.Models
         [JsonIgnore]
         public DateTime LastModified { get; set; }
 
-        [JsonIgnore]
-        public List<Airport> Airports { get; set; }
     }
 }
