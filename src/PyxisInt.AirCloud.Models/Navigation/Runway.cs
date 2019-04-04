@@ -17,6 +17,11 @@ namespace PyxisInt.AirCloud.Models.Navigation
         [StringLength(6)]
         public string RunwayId { get; set; }
 
+        [JsonProperty("airacCycle")]
+        [StringLength(4)]
+        [Required]
+        public string AiracCycle { get; set; }
+
         [JsonProperty("name")]
         [StringLength(50)]
         public string Name { get; set; }
