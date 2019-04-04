@@ -7,13 +7,17 @@ namespace PyxisInt.AirCloud.Models.Navigation
 {
     public class OperationalAirport
     {
-        [JsonProperty("airlineId")]
-        [Required]
+        [JsonIgnore]
         public Guid AirlineId { get; set; }
 
-        [JsonProperty("airportId")]
-        [Required]
+        [JsonProperty("airline")]
+        public Airline Airline { get; set; }
+
+        [JsonIgnore]
         public Guid AirportId { get; set; }
+
+        [JsonProperty("airport")]
+        public Airport Airport { get; set; }
 
         [JsonProperty("timeZone")]
         [StringLength(50)]
