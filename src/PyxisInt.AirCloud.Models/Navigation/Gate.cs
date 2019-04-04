@@ -1,10 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-
 namespace PyxisInt.AirCloud.Models.Navigation
 {
-    public class Runway
+    public class Gate
     {
         [JsonIgnore]
         public Guid AirportId { get; set; }
@@ -12,23 +11,18 @@ namespace PyxisInt.AirCloud.Models.Navigation
         [JsonProperty("airport")]
         public Airport Airport { get; set; }
 
-        [JsonProperty("runwayId")]
+        [JsonProperty("gateId")]
+        [StringLength(8)]
+        public string GateId { get; set; }
+
+        [JsonProperty("airacCycle")]
+        [StringLength(4)]
         [Required]
-        [StringLength(6)]
-        public string RunwayId { get; set; }
+        public string AiracCycle { get; set; }
 
         [JsonProperty("name")]
         [StringLength(50)]
         public string Name { get; set; }
-
-        [JsonProperty("bearing")]
-        public double Bearing { get; set; }
-
-        [JsonProperty("length")]
-        public int Length { get; set; }
-
-        [JsonProperty("width")]
-        public int Width { get; set; }
 
         [JsonProperty("latitude")]
         public double Latitude { get; set; }

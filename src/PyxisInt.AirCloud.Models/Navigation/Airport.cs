@@ -73,5 +73,8 @@ namespace PyxisInt.AirCloud.Models.Navigation
         [JsonProperty("runways")]
         public List<Runway> Runways { get; set; }
 
+        [JsonProperty("gates")]
+        public List<Gate> Gates { get; set; }
+
     }
 }
