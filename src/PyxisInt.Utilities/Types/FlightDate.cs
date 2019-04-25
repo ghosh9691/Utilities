@@ -68,6 +68,11 @@ namespace PyxisInt.Utilities.Types
             return (thisInUtc == targetUtc);
         }
 
+        public override int GetHashCode()
+        {
+            return this.ToUtc().GetHashCode();
+        }
+
         public bool IsGreaterThan(FlightDate target)
         {
             DateTime thisInUtc = ToUtc();
