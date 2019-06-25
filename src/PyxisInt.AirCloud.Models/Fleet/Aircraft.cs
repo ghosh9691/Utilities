@@ -154,5 +154,14 @@ namespace PyxisInt.AirCloud.Models.Fleet
         [StringLength(13)]
         [JsonProperty("atcNAV")]
         public string AtcNAV { get; set; }
+
+        [JsonProperty("created")]
+        public DateTime Created { get; set; }
+
+        [JsonProperty("modified")]
+        public DateTime Modified { get; set; }
+
+        [JsonProperty("owner")]
+        public string Owner { get; set; }
     }
 }
