@@ -1,4 +1,5 @@
-﻿using NodaTime;
+﻿using Microsoft.EntityFrameworkCore;
+using NodaTime;
 using NodaTime.Extensions;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace PyxisInt.Utilities.Types
     /// FlightDate refers to the date &amp; time a flight departs. It can be used where ever a
     /// zoned datetime is required.
     /// </summary>
+    [Owned]
     public class FlightDate
     {
         private DateTime _dateTime;

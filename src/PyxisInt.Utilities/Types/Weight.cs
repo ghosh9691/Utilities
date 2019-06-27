@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PyxisInt.Utilities.Enums;
 
 namespace PyxisInt.Utilities.Types
 {
+    [Owned]
     public class Weight
     {
         public Weight()
