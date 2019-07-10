@@ -1,4 +1,4 @@
-﻿using Flitesys.GeographicLib;
+﻿using PyxisInt.GeographicLib;
 
 namespace PyxisInt.Utilities
 {
