@@ -144,5 +144,40 @@ namespace PyxisInt.Utilities
             byte[] bytesToEncode = Encoding.UTF8.GetBytes(value);
             return Convert.ToBase64String(bytesToEncode);
         }
+
+        public static Int32 ToInt32(this string value)
+        {
+            try
+            {
+                return Convert.ToInt32(value);
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public static Int64 ToInt64(this string value)
+        {
+            try
+            {
+                return Convert.ToInt64(value);
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        public static double ToDouble(this string value)
+        {
+            try
+            {
+                return Convert.ToDouble(value);
+            }
+            catch
+            {
+                return 0.0;
+            }
+        }
     }
 }
