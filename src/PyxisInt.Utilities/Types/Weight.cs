@@ -2,10 +2,12 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PyxisInt.Utilities.Enums;
+using System.Diagnostics;
 
 namespace PyxisInt.Utilities.Types
 {
     [Owned]
+    [DebuggerDisplay("{Value} {Units}")]
     public class Weight
     {
         public Weight()
@@ -22,5 +24,10 @@ namespace PyxisInt.Utilities.Types
         public WeightUnits Units { get; set; }
 
         public double Value { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Value} {Units}";
+        }
     }
 }
