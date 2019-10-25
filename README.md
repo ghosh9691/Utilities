@@ -4,7 +4,7 @@ TODO: Give a short introduction of your project. Let this section explain the ob
 # Get Latest
 [![Build status](https://dev.azure.com/PyxisInternational/Utilities/_apis/build/status/Utilities-CI)](https://dev.azure.com/PyxisInternational/Utilities/_build/latest?definitionId=17)
 
-[![PyxisInt.Utilities package in FlitesysPackages feed in Azure Artifacts](https://feeds.dev.azure.com/PyxisInternational/_apis/public/Packaging/Feeds/bec6ffd5-3e85-4f6d-a088-7602732784b7/Packages/0fdec136-ba40-4c97-8acc-4f469d8b2fff/Badge)](https://dev.azure.com/PyxisInternational/Utilities/_packaging?_a=package&feed=bec6ffd5-3e85-4f6d-a088-7602732784b7&package=0fdec136-ba40-4c97-8acc-4f469d8b2fff&preferRelease=true)
+[![PyxisInt.Utilities package in PyxisPackages feed in Azure Artifacts](https://feeds.dev.azure.com/PyxisInternational/_apis/public/Packaging/Feeds/b78da031-a96b-480e-935c-9aa7488736dc/Packages/44b4ebf5-d8e4-405c-8edf-216e327075bb/Badge)](https://dev.azure.com/PyxisInternational/Utilities/_packaging?_a=package&feed=b78da031-a96b-480e-935c-9aa7488736dc&package=44b4ebf5-d8e4-405c-8edf-216e327075bb&preferRelease=true)
 
 
 # Getting Started
