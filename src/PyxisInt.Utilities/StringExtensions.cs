@@ -179,5 +179,18 @@ namespace PyxisInt.Utilities
                 return 0.0;
             }
         }
+
+        public static bool IsDigits(this string value)
+        {
+            try
+            {
+                int i = 0;
+                return int.TryParse(value, out i);
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
