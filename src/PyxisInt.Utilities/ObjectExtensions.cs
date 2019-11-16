@@ -37,5 +37,12 @@ namespace PyxisInt.Utilities
                 return string.Empty;
             }
         }
+
+        public static bool IsEqual(this object obj, object compareTo)
+        {
+            var objJson = obj.ToJson();
+            var compareToJson = compareTo.ToJson();
+            return objJson.Equals(compareToJson);
+        }
     }
 }
