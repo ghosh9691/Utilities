@@ -40,8 +40,8 @@ namespace PyxisInt.Utilities
 
         public static bool IsEqual(this object obj, object compareTo)
         {
-            var objJson = obj.ToJson();
-            var compareToJson = compareTo.ToJson();
+            var objJson = obj.ToJson().GetHash();
+            var compareToJson = compareTo.ToJson().GetHash();
             return objJson.Equals(compareToJson);
         }
     }
