@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\PyxisInt.Utilities\PyxisInt.Utilities.csproj" />
+    <ProjectReference Include="..\..\src\PrabalGhosh.Utilities\PrabalGhosh.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

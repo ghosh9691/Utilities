@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PyxisInt.Utilities
+namespace PrabalGhosh.Utilities
 {
     public static class ConsoleEx
     {

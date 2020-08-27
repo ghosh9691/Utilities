@@ -1,8 +1,8 @@
-﻿using PyxisInt.Utilities.Types;
+﻿using PrabalGhosh.Utilities.Types;
 using System;
 using Xunit;
 
-namespace PyxisInt.Utilities.Tests
+namespace PrabalGhosh.Utilities.Tests
 {
     public class FlightDateTests
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Cryptography;
 
-namespace PyxisInt.Utilities
+namespace PrabalGhosh.Utilities
 {
     public class IdGenerator
     {

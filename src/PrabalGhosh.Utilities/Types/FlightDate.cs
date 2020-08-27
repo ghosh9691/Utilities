@@ -4,7 +4,7 @@ using NodaTime.Extensions;
 using System;
 using System.Collections.Generic;
 
-namespace PyxisInt.Utilities.Types
+namespace PrabalGhosh.Utilities.Types
 {
     /// <summary>
     /// FlightDate refers to the date &amp; time a flight departs. It can be used where ever a

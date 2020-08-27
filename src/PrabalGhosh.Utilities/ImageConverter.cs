@@ -5,7 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 
-namespace PyxisInt.Utilities
+namespace PrabalGhosh.Utilities
 {
     public class ImageConverter : JsonConverter
     {

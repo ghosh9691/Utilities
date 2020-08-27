@@ -1,4 +1,4 @@
-﻿namespace PyxisInt.Utilities.Types
+﻿namespace PrabalGhosh.Utilities.Types
 {
     public class LogEntry
     {

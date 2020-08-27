@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace PyxisInt.Utilities.Enums
+namespace PrabalGhosh.Utilities.Enums
 {
     public enum WeightUnits
     {

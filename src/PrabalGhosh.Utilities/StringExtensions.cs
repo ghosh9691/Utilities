@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PyxisInt.Utilities
+namespace PrabalGhosh.Utilities
 {
     public static class StringExtensions
     {

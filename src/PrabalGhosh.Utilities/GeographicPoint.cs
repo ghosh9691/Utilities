@@ -1,6 +1,6 @@
 ﻿using PyxisInt.GeographicLib;
 
-namespace PyxisInt.Utilities
+namespace PrabalGhosh.Utilities
 {
     public class GeographicPoint
     {

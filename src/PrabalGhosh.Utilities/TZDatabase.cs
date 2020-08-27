@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PyxisInt.Utilities
+namespace PrabalGhosh.Utilities
 {
     public static class TZDatabase
     {

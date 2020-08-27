@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PyxisInt.Utilities
+namespace PrabalGhosh.Utilities
 {
     public static class ObjectExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace PyxisInt.Utilities
+﻿namespace PrabalGhosh.Utilities
 {
     public class GeographicResult
     {

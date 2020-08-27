@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace PyxisInt.Utilities.Tests
+namespace PrabalGhosh.Utilities.Tests
 {
     public class GeographicPointTests
     {

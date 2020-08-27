@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using PyxisInt.Utilities.Enums;
+using PrabalGhosh.Utilities.Enums;
 using System.Diagnostics;
 
-namespace PyxisInt.Utilities.Types
+namespace PrabalGhosh.Utilities.Types
 {
     [Owned]
     [DebuggerDisplay("{Value} {Units}")]
