@@ -1,5 +1,5 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+PrabalGhosh.Utilities is a small utility project containing a number of useful classes, methods and extensions. These are commonly needed in most applications. Some examples are methods to check for string null or empty 
 
 # Get Latest
 [![Build status](https://dev.azure.com/PyxisInternational/Utilities/_apis/build/status/Utilities-CI)](https://dev.azure.com/PyxisInternational/Utilities/_build/latest?definitionId=17)
