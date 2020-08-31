@@ -156,6 +156,19 @@ namespace PrabalGhosh.Utilities
                 return -1;
             }
         }
+
+        public static Int32? ToNullableInt32(this string value)
+        {
+            try
+            {
+                return Convert.ToInt32(value);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        
         public static Int64 ToInt64(this string value)
         {
             try
@@ -168,7 +181,31 @@ namespace PrabalGhosh.Utilities
             }
         }
 
+        public static Int64? ToNullableInt64(this string value)
+        {
+            try
+            {
+                return Convert.ToInt64(value);
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
         public static double ToDouble(this string value)
+        {
+            try
+            {
+                return Convert.ToDouble(value);
+            }
+            catch
+            {
+                return 0.0;
+            }
+        }
+
+        public static double? ToNullableDouble(this string value)
         {
             try
             {
