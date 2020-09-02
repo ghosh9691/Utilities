@@ -79,5 +79,11 @@ namespace PrabalGhosh.Utilities
                 return false;
             return true;
         }
+
+        public static string GetCurrentAiracCycle()
+        {
+            var airac = new Airac(DateTime.UtcNow);
+            return airac.ToString();
+        }
     }
 }
