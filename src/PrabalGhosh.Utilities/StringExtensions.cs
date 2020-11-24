@@ -229,5 +229,10 @@ namespace PrabalGhosh.Utilities
                 return false;
             }
         }
+
+        public static string GetId(this string value)
+        {
+            return DateTime.UtcNow.Ticks.ToString("X");
+        }
     }
 }
