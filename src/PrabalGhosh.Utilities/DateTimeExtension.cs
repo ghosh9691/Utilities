@@ -21,5 +21,10 @@ namespace PrabalGhosh.Utilities
                 return GetSafeMinimumDateZulu(value);
             return parsedValue;
         }
+
+        public static long ToUnixEpoch(this DateTime value)
+        {
+            return (long)Math.Round((value.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+        }
     }
 }
