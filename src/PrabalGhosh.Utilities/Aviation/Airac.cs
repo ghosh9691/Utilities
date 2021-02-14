@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrabalGhosh.Utilities
+namespace PrabalGhosh.Utilities.Aviation
 {
     public class Airac
     {

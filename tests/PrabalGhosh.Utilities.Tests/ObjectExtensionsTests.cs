@@ -1,3 +1,4 @@
+using PrabalGhosh.Utilities.Geographic;
 using Xunit;
 
 namespace PrabalGhosh.Utilities.Tests

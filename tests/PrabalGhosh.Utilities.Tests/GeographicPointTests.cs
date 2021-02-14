@@ -1,8 +1,14 @@
 ﻿using System;
+using PrabalGhosh.Utilities.Geographic;
 using Xunit;
 
 namespace PrabalGhosh.Utilities.Tests
 {
+    /// <summary>
+    /// The distance between 2 points are computed using Vincenty's formula
+    /// and is expressed in meters. For more details, see
+    /// https://en.wikipedia.org/wiki/Vincenty's_formulae
+    /// </summary>
     public class GeographicPointTests
     {
         [Fact]
@@ -35,7 +41,7 @@ namespace PrabalGhosh.Utilities.Tests
 
             GeographicResult result = jfk.DistanceTo(lhr);
             Assert.NotNull(result);
-            double expectedDistance = 5554539.949;
+            double expectedDistance = 5554539.949;  //in meters
             Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
             double expectedInitialCourse = 51.381;
             Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
@@ -49,7 +55,7 @@ namespace PrabalGhosh.Utilities.Tests
 
             GeographicResult result = lhr.DistanceTo(syd);
             Assert.NotNull(result);
-            double expectedDistance = 17016029.303;
+            double expectedDistance = 17016029.303; //in meters; using Vicenty's formula
             Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
             double expectedInitialCourse = 60.115;
             Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);

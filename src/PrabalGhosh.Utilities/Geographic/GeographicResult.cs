@@ -1,4 +1,4 @@
-﻿namespace PrabalGhosh.Utilities
+﻿namespace PrabalGhosh.Utilities.Geographic
 {
     public class GeographicResult
     {
