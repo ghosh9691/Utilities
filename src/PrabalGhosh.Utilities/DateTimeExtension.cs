@@ -24,7 +24,9 @@ namespace PrabalGhosh.Utilities
 
         public static long ToUnixEpoch(this DateTime value)
         {
-            return (long)Math.Round((value.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+            var result = value - DateTime.UnixEpoch;
+            return (long)result.TotalMilliseconds;
         }
+
     }
 }

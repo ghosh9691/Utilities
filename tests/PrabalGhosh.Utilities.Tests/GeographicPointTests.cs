@@ -45,6 +45,12 @@ namespace PrabalGhosh.Utilities.Tests
             Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
             double expectedInitialCourse = 51.381;
             Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
+            var toNM = result.ToNauticalMiles();
+            var toSM = result.ToStatuteMiles();
+            var toKM = result.ToKilometers();
+            Assert.Equal(5554.54, toKM, 2);
+            Assert.Equal(3451.43, toSM, 2);
+            Assert.Equal(2999.21, toNM, 2);
         }
 
         [Fact]
