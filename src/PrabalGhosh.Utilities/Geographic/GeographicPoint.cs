@@ -1,4 +1,5 @@
-﻿using PyxisInt.GeographicLib;
+﻿using GeoTimeZone;
+using PyxisInt.GeographicLib;
 
 namespace PrabalGhosh.Utilities.Geographic
 {
@@ -47,6 +48,15 @@ namespace PrabalGhosh.Utilities.Geographic
                 InitialCourse = g.InitialAzimuth < 0 ? 360.0 + g.InitialAzimuth : g.InitialAzimuth,
                 FinalCourse = g.FinalAzimuth < 0 ? 360.0 + g.FinalAzimuth : g.FinalAzimuth
             };
+        }
+
+        /// <summary>
+        /// Gets the time zone (IANA) where this point lies
+        /// </summary>
+        /// <returns>IANA Time zone Id</returns>
+        public string GetTimezone()
+        {
+            return TimeZoneLookup.GetTimeZone(this.Latitude, this.Longitude).Result;
         }
     }
 }
