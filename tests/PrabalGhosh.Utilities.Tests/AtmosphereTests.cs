@@ -8,7 +8,7 @@ namespace PrabalGhosh.Utilities.Tests
         [Fact]
         public async void ThetaAboveTroposphere()
         {
-            var result = Atmosphere.Theta(35000);
+            var result = Atmosphere.Theta(37000);
             Assert.Equal(0.7519, result, 4);
         }
     }
