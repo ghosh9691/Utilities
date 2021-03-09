@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace PrabalGhosh.Utilities
 {
@@ -28,5 +29,46 @@ namespace PrabalGhosh.Utilities
             return (long)result.TotalMilliseconds;
         }
 
+        public static DateTime GetMonthStart(this DateTime value, string month, string year, bool isUtc = true)
+        {
+            if ((month.Length != 3) && (year.Length != 4))
+            {
+                return DateTime.MinValue;
+            }
+
+            try
+            {
+                var m = DateTime.ParseExact(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(month),
+                    "MMM", CultureInfo.InvariantCulture).Month;
+                var y = Convert.ToInt32(year);
+                return new DateTime(y, m, 1, 0, 0, 0, isUtc ? DateTimeKind.Utc : DateTimeKind.Local);
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e.Message);
+                return DateTime.MinValue;
+            }
+        }
+        public static DateTime GetMonthEnd(this DateTime value, string month, string year, bool isUtc = true)
+        {
+            if ((month.Length != 3) && (year.Length != 4))
+            {
+                return DateTime.MinValue;
+            }
+
+            try
+            {
+                var m = DateTime.ParseExact(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(month),
+                    "MMM", CultureInfo.InvariantCulture).Month;
+                var y = Convert.ToInt32(year);
+                var lastDay = DateTime.DaysInMonth(y, m);
+                return new DateTime(y, m, lastDay, 0, 0, 0, isUtc ? DateTimeKind.Utc : DateTimeKind.Local);
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e.Message);
+                return DateTime.MinValue;
+            }
+        }
     }
 }
