@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace PrabalGhosh.Utilities
@@ -51,10 +52,9 @@ namespace PrabalGhosh.Utilities
         {
             if (obj.IsNull())
                 return null;
-            var bf = new BinaryFormatter();
-            using var ms = new MemoryStream();
-            bf.Serialize(ms, obj);
-            return ms.ToArray();
+            var json = obj.ToJson();
+            return Encoding.UTF8.GetBytes(json);
+
         }
 
         public static T FromByteArray<T>(this byte[] byteArray) where T : class
@@ -64,13 +64,8 @@ namespace PrabalGhosh.Utilities
                 return null;
             }
 
-            using (var ms = new MemoryStream())
-            {
-                var bf = new BinaryFormatter();
-                ms.Write(byteArray, 0, byteArray.Length);
-                ms.Seek(0, SeekOrigin.Begin);
-                return (T) bf.Deserialize(ms);
-            }
+            var jsonString = Encoding.UTF8.GetString(byteArray);
+            return JsonConvert.DeserializeObject<T>(jsonString);
         }
     }
 }
