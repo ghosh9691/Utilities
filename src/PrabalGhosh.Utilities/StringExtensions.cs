@@ -214,7 +214,7 @@ namespace PrabalGhosh.Utilities
             }
             catch
             {
-                return 0.0;
+                return null;
             }
         }
 
