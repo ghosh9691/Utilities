@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using PrabalGhosh.Utilities.Aviation;
+using System.Text.RegularExpressions;
 
 namespace PrabalGhosh.Utilities
 {
@@ -234,6 +235,11 @@ namespace PrabalGhosh.Utilities
         public static string GetId(this string value)
         {
             return DateTime.UtcNow.Ticks.ToString("X");
+        }
+
+        public static string RemoveUnwantedCharacters(this string value, string allowedCharactersRegEx)
+        {
+            return Regex.Replace(value, allowedCharactersRegEx, string.Empty);
         }
     }
 }
