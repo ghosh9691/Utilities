@@ -1,4 +1,5 @@
 ﻿using GeoTimeZone;
+using NetTopologySuite.Geometries;
 using PyxisInt.GeographicLib;
 
 namespace PrabalGhosh.Utilities.Geographic
@@ -22,6 +23,12 @@ namespace PrabalGhosh.Utilities.Geographic
         {
             Latitude = another.Latitude;
             Longitude = another.Longitude;
+        }
+
+        public GeographicPoint(Point point)
+        {
+            Latitude = point.X;
+            Longitude = point.Y;
         }
 
         public GeographicPoint DestinationPoint(double course, double distance)
