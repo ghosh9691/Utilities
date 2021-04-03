@@ -1,12 +1,30 @@
-﻿namespace PrabalGhosh.Utilities.Geographic
+﻿using System;
+
+namespace PrabalGhosh.Utilities.Geographic
 {
     public class GeographicResult
     {
+        private double _finalCourse;
+
+        private double _initialCourse;
+        
         // Distance in meters
         public double Distance { get; set; }
-
-        public double FinalCourse { get; set; }
-        public double InitialCourse { get; set; }
+        
+        public double FinalCourse {
+            get
+            {
+                return Math.Round(_finalCourse);
+            }
+            set => _finalCourse = value;
+        }
+        public double InitialCourse {
+            get
+            {
+                return Math.Round(_initialCourse);
+            }
+            set => _initialCourse = value;
+        }
 
     }
 

@@ -21,7 +21,7 @@ namespace PrabalGhosh.Utilities.Tests
             Assert.NotNull(result);
             double expectedDistance = 11003766.139;
             Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
-            double expectedInitialCourse = 352.006;
+            double expectedInitialCourse = 352.0;
             Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
         }
 
@@ -43,7 +43,7 @@ namespace PrabalGhosh.Utilities.Tests
             Assert.NotNull(result);
             double expectedDistance = 5554539.949;  //in meters
             Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
-            double expectedInitialCourse = 51.381;
+            double expectedInitialCourse = 51.0;
             Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
             var toNM = result.ToNauticalMiles();
             var toSM = result.ToStatuteMiles();
@@ -63,7 +63,7 @@ namespace PrabalGhosh.Utilities.Tests
             Assert.NotNull(result);
             double expectedDistance = 17016029.303; //in meters; using Vicenty's formula
             Assert.True(Math.Abs(result.Distance - expectedDistance) <= 0.001);
-            double expectedInitialCourse = 60.115;
+            double expectedInitialCourse = 60.0;
             Assert.True(Math.Abs(result.InitialCourse - expectedInitialCourse) <= 0.001);
         }
     }
