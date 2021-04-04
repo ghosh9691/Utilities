@@ -7,10 +7,19 @@ namespace PrabalGhosh.Utilities.Geographic
         private double _finalCourse;
 
         private double _initialCourse;
+
+        private double _distance;
         
         // Distance in meters
-        public double Distance { get; set; }
-        
+        public double Distance
+        {
+            get
+            {
+                return Math.Round(_distance, 2);
+            }
+            set => _distance = value;
+        }
+
         public double FinalCourse {
             get
             {

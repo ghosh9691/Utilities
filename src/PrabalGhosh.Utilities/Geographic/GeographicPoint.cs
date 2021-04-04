@@ -1,4 +1,5 @@
-﻿using GeoTimeZone;
+﻿using System.Numerics;
+using GeoTimeZone;
 using NetTopologySuite.Geometries;
 using PyxisInt.GeographicLib;
 
@@ -27,8 +28,8 @@ namespace PrabalGhosh.Utilities.Geographic
 
         public GeographicPoint(Point point)
         {
-            Latitude = point.X;
-            Longitude = point.Y;
+            Latitude = point.Coordinate.Y;
+            Longitude = point.Coordinate.X;
         }
 
         public GeographicPoint DestinationPoint(double course, double distance)
@@ -49,6 +50,43 @@ namespace PrabalGhosh.Utilities.Geographic
         public GeographicResult DistanceTo(GeographicPoint toPoint)
         {
             GeodesicData g = Geodesic.WGS84.Inverse(this.Latitude, this.Longitude, toPoint.Latitude, toPoint.Longitude, GeodesicMask.ALL);
+            return new GeographicResult
+            {
+                Distance = g.Distance,
+                InitialCourse = g.InitialAzimuth < 0 ? 360.0 + g.InitialAzimuth : g.InitialAzimuth,
+                FinalCourse = g.FinalAzimuth < 0 ? 360.0 + g.FinalAzimuth : g.FinalAzimuth
+            };
+        }
+
+        public GeographicResult Intercept(GeographicLine geoLine)
+        {
+            var geod = Geodesic.WGS84;
+            var gn = new Gnomonic(geod);
+            //initial guess...
+            var gc = geoLine.GreatCircle();
+            var dist = gc.Distance / 2;
+            var initialGuess = geoLine.Start.DestinationPoint(gc.InitialCourse, dist);
+            double latI = initialGuess.Latitude;
+            double lonI = initialGuess.Longitude;
+            ConsoleEx.WriteMessage($"Point Intercept: Initial Guess: {latI}/{lonI}");
+            for (int i = 0; i < 10; i++)
+            {
+                var xa1 = gn.Forward(latI, lonI, geoLine.Start.Latitude, geoLine.Start.Longitude);
+                var xa2 = gn.Forward(latI, lonI, geoLine.End.Latitude, geoLine.End.Longitude);
+                var xb1 = gn.Forward(latI, lonI, this.Latitude, this.Longitude);
+                var va1 = new Vector(xa1.x, xa1.y);
+                var va2 = new Vector(xa2.x, xa2.y);
+                var la = va1.Cross(va2);
+                var vb1 = new Vector(xb1.x, xb1.y);
+                var lb = new Vector(la.Y, -la.X, la.X * xb1.y - la.Y * xb1.x);
+                var p0 = la.Cross(lb);
+                p0.Norm();
+                var solved = gn.Reverse(latI, lonI, p0.X, p0.Y);
+                latI = solved.PointLatitude;
+                lonI = solved.PointLongitude;
+            }
+            ConsoleEx.WriteMessage($"Final Result: {latI}/{lonI}");
+            var g = geod.Inverse(latI, lonI, this.Latitude, this.Longitude);
             return new GeographicResult
             {
                 Distance = g.Distance,
