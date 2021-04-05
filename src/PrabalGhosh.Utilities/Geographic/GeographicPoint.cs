@@ -1,10 +1,16 @@
 ﻿using System.Numerics;
 using GeoTimeZone;
+using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using PyxisInt.GeographicLib;
 
 namespace PrabalGhosh.Utilities.Geographic
 {
+    /// <summary>
+    /// GeographicPoint is a representation of a location on the surface of the Earth.
+    /// This representation can be instantiated from a latitude/longitude value as a double
+    /// or from a Point() data type (from NETTopologySuite). 
+    /// </summary>
     public class GeographicPoint
     {
         public double Latitude;
@@ -58,6 +64,13 @@ namespace PrabalGhosh.Utilities.Geographic
             };
         }
 
+        /// <summary>
+        /// Computes the interception point from a location to a great-circle track defined
+        /// by the GeographicLine. The returned data contains the distance to the interception
+        /// point, the initial and final courses, as well as the point itself.
+        /// </summary>
+        /// <param name="geoLine"></param>
+        /// <returns></returns>
         public GeographicResult Intercept(GeographicLine geoLine)
         {
             var geod = Geodesic.WGS84;
@@ -91,7 +104,8 @@ namespace PrabalGhosh.Utilities.Geographic
             {
                 Distance = g.Distance,
                 InitialCourse = g.InitialAzimuth < 0 ? 360.0 + g.InitialAzimuth : g.InitialAzimuth,
-                FinalCourse = g.FinalAzimuth < 0 ? 360.0 + g.FinalAzimuth : g.FinalAzimuth
+                FinalCourse = g.FinalAzimuth < 0 ? 360.0 + g.FinalAzimuth : g.FinalAzimuth,
+                Coords = new GeographicPoint(latI, lonI)
             };
         }
 
@@ -102,6 +116,12 @@ namespace PrabalGhosh.Utilities.Geographic
         public string GetTimezone()
         {
             return TimeZoneLookup.GetTimeZone(this.Latitude, this.Longitude).Result;
+        }
+
+        public Point ToGeometryPoint()
+        {
+            var gf = NtsGeometryServices.Instance.CreateGeometryFactory(4326);
+            return gf.CreatePoint(new Coordinate(this.Longitude, this.Latitude));
         }
     }
 }

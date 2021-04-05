@@ -34,6 +34,8 @@ namespace PrabalGhosh.Utilities.Geographic
             }
             set => _initialCourse = value;
         }
+        
+        public GeographicPoint Coords { get; set; }
 
     }
 
