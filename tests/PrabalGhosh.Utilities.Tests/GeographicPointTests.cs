@@ -108,16 +108,31 @@ namespace PrabalGhosh.Utilities.Tests
         [Fact]
         public void TestIntersectionAcross180Meridian()
         {
-            var nrt = new GeographicPoint(35.76527778, 140.38555556);
-            var lax = new GeographicPoint(33.94249722, -118.40805);
-            var yvr = new GeographicPoint(49.19469722, -123.18396944);
-            var syd = new GeographicPoint(-33.946, 151.17711111);
+            var point1 = new GeographicPoint(-34.0, -118.0);
+            var point2 = new GeographicPoint(55.0, -123.0);
+            var point4 = new GeographicPoint(51.0, -100.0);
+            var point3 = new GeographicPoint(-3, 151);
+            var point5 = new GeographicPoint(52.086845142064014, -122.65508307660909);
+            var point6 = new GeographicPoint(-2, 151);
 
-            var lineNrtLax = new GeographicLine(nrt, lax);
-            var lineYvrSyd = new GeographicLine(yvr, syd);
-            var intersection = lineNrtLax.Intersect(lineYvrSyd);
-            Assert.NotNull(intersection);
+            var gd = point3.DistanceTo(point5);
+            var gd2 = point6.DistanceTo(point5);
 
+            var line1 = new GeographicLine(point1, point2);
+            point3 = new GeographicPoint(-2.0, 151.0);
+            var line2 = new GeographicLine(point3, point4);
+            var intxn = line1.Intersect(line2);
+            if (intxn.IsNotNull())
+            {
+                ConsoleEx.WriteMessage("Success!");
+            }
+            point3 = new GeographicPoint(-3.0, 151.0);
+            line2 = new GeographicLine(point3, point4);
+            intxn = line1.Intersect(line2);
+            if (!intxn.IsNotNull())
+            {
+                ConsoleEx.WriteMessage("Failure!");
+            }
         }
 
         [Fact]

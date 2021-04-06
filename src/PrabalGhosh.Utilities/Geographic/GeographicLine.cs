@@ -36,11 +36,12 @@ namespace PrabalGhosh.Utilities.Geographic
             var geod = Geodesic.WGS84;
             var gn = new Gnomonic(geod);
             //guess the intersection point...
-            var gc = this.GreatCircle();
+            var gc = line.GreatCircle();
             var dist = gc.Distance / 2.0;
-            var intersection = this.Start.DestinationPoint(gc.InitialCourse, dist);
+            var intersection = line.Start.DestinationPoint(gc.InitialCourse, dist);
             var latI = intersection.Latitude;
             var lonI = intersection.Longitude;
+            ConsoleEx.WriteMessage($"Initial Guess: {latI}/{lonI}");
             for (int i = 0; i < 10; i++)
             {
                 var xa1 = gn.Forward(latI, lonI, line.Start.Latitude, line.Start.Longitude);
@@ -58,6 +59,7 @@ namespace PrabalGhosh.Utilities.Geographic
                 var solved = gn.Reverse(latI, lonI, p0.X, p0.Y);
                 latI = solved.PointLatitude;
                 lonI = solved.PointLongitude;
+                ConsoleEx.WriteMessage($"Run {i}: Guessed {latI}/{lonI}");
             }
 
             var intPoint = new GeographicPoint(latI, lonI);
