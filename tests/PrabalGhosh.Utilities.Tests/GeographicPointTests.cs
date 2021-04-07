@@ -53,6 +53,8 @@ namespace PrabalGhosh.Utilities.Tests
             Assert.Equal(5554.54, toKM, 2);
             Assert.Equal(3451.43, toSM, 2);
             Assert.Equal(2999.21, toNM, 2);
+            var gr = jfk.GetGreatCircle(lhr);
+            Assert.NotNull(gr);
         }
 
         [Fact]

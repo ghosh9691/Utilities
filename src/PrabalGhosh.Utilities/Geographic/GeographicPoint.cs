@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using GeoTimeZone;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
@@ -13,6 +14,7 @@ namespace PrabalGhosh.Utilities.Geographic
     /// </summary>
     public class GeographicPoint
     {
+        private const double C = 0.996647189296812; //complement of ellipticity - WGS84
         public double Latitude;
         public double Longitude;
 
@@ -36,6 +38,212 @@ namespace PrabalGhosh.Utilities.Geographic
         {
             Latitude = point.Coordinate.Y;
             Longitude = point.Coordinate.X;
+        }
+
+        public SphericalPoint ToSpherical()
+        {
+            var sph = new SphericalPoint();
+            sph.Longitude = this.Longitude * Math.PI / 180.0;
+            sph.CoLatitude = this.Latitude * Math.PI / 180.0;
+            if ((sph.CoLatitude < (Math.PI / 2.0)) && (sph.CoLatitude > (-Math.PI / 2.0)))
+                sph.CoLatitude = Math.Atan(C * Math.Sin(sph.CoLatitude) / Math.Cos(sph.CoLatitude));
+            sph.CoLatitude = (Math.PI / 2.0) - sph.CoLatitude;
+            return sph;
+        }
+
+        public GeographicResult GetGreatCircle(GeographicPoint to)
+        {
+            var gcDistance = 0.0;
+            var igcCourse = 0.0;
+            var rgcCourse = 0.0;
+            var centeredAtEquator = false;
+            
+            var sFrom = this.ToSpherical();
+            var sTo = to.ToSpherical();
+            
+            //handle equal points...
+            if (sFrom.CoLatitude.Equals(sTo.CoLatitude) && sFrom.Longitude.Equals(sTo.Longitude))
+            {
+                return ConvertToDegreeAndNauticalMile(gcDistance, igcCourse, rgcCourse);
+            }
+            //Handle crossing 180° meridian
+            var dLon = sTo.Longitude - sFrom.Longitude;
+            if (dLon < -Math.PI)
+                dLon += (Math.PI * 2.0);
+            if (dLon > Math.PI)
+                dLon -= (Math.PI * 2.0);
+            if (Math.Abs(dLon) < 1.0e-9)
+                dLon = 0.0;
+            var halfAA = dLon * 0.5;
+            //if either colat is at either pole
+            if (halfAA == 0
+                || (sFrom.CoLatitude <= 0.0000001)
+                || (sTo.CoLatitude <= 0.0000001)
+                || (sFrom.CoLatitude > (Math.PI - 0.0000001))
+                || (sTo.CoLatitude > (Math.PI - 0.0000001)))
+            {
+                //handle spherical polar cases
+                gcDistance = sTo.CoLatitude - sFrom.CoLatitude;
+                if (gcDistance < 0)
+                {
+                    gcDistance = -gcDistance;
+                    igcCourse = 0;
+                    rgcCourse = Math.PI;
+                }
+                else
+                {
+                    if (gcDistance == 0)
+                    {
+                        igcCourse = 0;
+                        rgcCourse = 0;
+                    }
+                    else
+                    {
+                        igcCourse = Math.PI;
+                        rgcCourse = 0;
+                    }
+                }
+            }
+            else
+            {
+                //compute using 3rd and 4th Napier analogies
+                var halfBpc = (sTo.CoLatitude + sFrom.CoLatitude) * 0.5;
+                var cosHalfBpc = Math.Cos(halfBpc);
+                //if segment centered at equator
+                if (Math.Abs(cosHalfBpc) < 1.0e-7)
+                {
+                    centeredAtEquator = true;
+                    if (Math.Abs(sTo.CoLatitude - sFrom.CoLatitude) < 1.0e-5)
+                    {
+                        //along the equator
+                        gcDistance = dLon;
+                        if (gcDistance < 0)
+                        {
+                            igcCourse = Math.PI * 1.5;
+                            rgcCourse = Math.PI * 0.5;
+                            gcDistance = -gcDistance;
+                        }
+                        else
+                        {
+                            if (gcDistance == 0)
+                            {
+                                igcCourse = 0.0;
+                                rgcCourse = 0.0;
+                            }
+                            else
+                            {
+                                igcCourse = Math.PI * 0.5;
+                                rgcCourse = Math.PI * 1.5;
+                            }
+                        }
+
+                        return ConvertToDegreeAndNauticalMile(gcDistance, igcCourse, rgcCourse);
+                    }
+
+                    halfAA *= 0.5;
+                    sTo.CoLatitude = Math.PI * 0.5;
+                    halfBpc = (sTo.CoLatitude + sFrom.CoLatitude) * 0.5;
+                    cosHalfBpc = Math.Cos(halfBpc);
+                }
+                else
+                {
+                    centeredAtEquator = false;
+                }
+
+                //use 1st and 2nd Gaussian Analogies
+                var sinHalfAA = Math.Sin(halfAA);
+                var cosHalfAA = Math.Cos(halfAA);
+                var sinHalfBpc = Math.Sin(halfBpc);
+                var halfBmc = (sTo.CoLatitude - sFrom.CoLatitude) * 0.5;
+                var halfBBpCC = Math.Atan(cosHalfAA / sinHalfAA * Math.Cos(halfBmc) / cosHalfBpc);
+                var halfBBmCC = Math.Atan(cosHalfAA / sinHalfAA * Math.Sin(halfBmc) / sinHalfBpc);
+                var cosHalfBBpCC = Math.Cos(halfBBpCC);
+                var sinHalfA = sinHalfAA * sinHalfBpc / Math.Cos(halfBBmCC);
+                var cosHalfA = sinHalfAA * cosHalfBpc / cosHalfBBpCC;
+                igcCourse = halfBBpCC + halfBBmCC;
+                if (centeredAtEquator)
+                {
+                    gcDistance = 4 * Math.Atan(sinHalfA / cosHalfA);
+                    if (igcCourse < Math.PI)
+                        rgcCourse = igcCourse + Math.PI;
+                    else
+                    {
+                        rgcCourse = igcCourse - Math.PI;
+                    }
+                }
+                else
+                {
+                    gcDistance = 2 * Math.Atan(sinHalfA / cosHalfA);
+                    rgcCourse = halfBBpCC - halfBBmCC;
+                }
+
+                if (gcDistance < 0)
+                    gcDistance = -gcDistance;
+                if ((igcCourse * dLon) < 0)
+                {
+                    if (igcCourse < 0)
+                    {
+                        igcCourse += Math.PI;
+                    }
+                    else
+                    {
+                        igcCourse -= Math.PI;
+                    }
+                }
+
+                if ((rgcCourse * dLon) > 0)
+                {
+                    rgcCourse = -rgcCourse;
+                }
+                else
+                {
+                    if (rgcCourse < 0)
+                    {
+                        rgcCourse = -Math.PI - rgcCourse;
+                    }
+                    else
+                    {
+                        rgcCourse = Math.PI - rgcCourse;
+                    }
+                }
+                //put courses in positive bearings...
+                if (igcCourse < 0)
+                    igcCourse += (Math.PI * 2.0);
+                if (igcCourse > (2.0 * Math.PI - 0.000017))
+                    igcCourse = 0;
+                if (rgcCourse < 0)
+                    rgcCourse += (Math.PI * 2.0);
+                if (rgcCourse > (2.0 * Math.PI - 0.000017))
+                    rgcCourse = 0;
+            }
+
+            return ConvertToDegreeAndNauticalMile(gcDistance, igcCourse, rgcCourse);
+        }
+
+        private GeographicResult ConvertToDegreeAndNauticalMile(double dist, double iCourse, double rCourse)
+        {
+            if (Math.Abs(rCourse - Math.PI) < 1.0e-10)
+            {
+                rCourse = 0;
+            }
+            else
+            {
+                if (rCourse > Math.PI)
+                {
+                    rCourse -= Math.PI;
+                }
+                else
+                {
+                    rCourse += Math.PI;
+                }
+            }
+
+            return new GeographicResult()
+            {
+                Distance = dist * 180.0 / Math.PI * 60.0,
+                InitialCourse = (iCourse + rCourse) * 0.5 * 180.0 / Math.PI,
+                FinalCourse = rCourse
+            };
         }
 
         public GeographicPoint DestinationPoint(double course, double distance)
