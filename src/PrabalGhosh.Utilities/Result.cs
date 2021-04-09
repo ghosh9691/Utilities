@@ -7,7 +7,6 @@
 
         public Result()
         {
-
         }
 
         public Result(T data)

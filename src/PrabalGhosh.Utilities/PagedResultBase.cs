@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace PrabalGhosh.Utilities
 {
     public class PagedResultBase

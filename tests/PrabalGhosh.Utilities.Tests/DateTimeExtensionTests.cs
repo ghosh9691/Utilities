@@ -14,9 +14,9 @@ namespace PrabalGhosh.Utilities.Tests
             var value = (new DateTime()).GetMonthStart(month, year);
             Assert.Equal(expected, value);
         }
-        
+
         [Fact]
-        public  void EndOfMonthShouldReturnCorrect()
+        public void EndOfMonthShouldReturnCorrect()
         {
             var month = "jan";
             var year = "2020";
@@ -24,9 +24,9 @@ namespace PrabalGhosh.Utilities.Tests
             var value = (new DateTime()).GetMonthEnd(month, year);
             Assert.Equal(expected, value);
         }
-        
+
         [Fact]
-        public  void StartOfFebShouldReturnCorrect()
+        public void StartOfFebShouldReturnCorrect()
         {
             var month = "Feb";
             var year = "2020";
@@ -34,9 +34,9 @@ namespace PrabalGhosh.Utilities.Tests
             var value = (new DateTime()).GetMonthStart(month, year);
             Assert.Equal(expected, value);
         }
-        
+
         [Fact]
-        public  void EndOfFebInLeapYearShouldReturnCorrect()
+        public void EndOfFebInLeapYearShouldReturnCorrect()
         {
             //it was a leap year
             var month = "Feb";
@@ -45,9 +45,9 @@ namespace PrabalGhosh.Utilities.Tests
             var value = (new DateTime()).GetMonthEnd(month, year);
             Assert.Equal(expected, value);
         }
-        
+
         [Fact]
-        public  void EndOfFebNonLeapYearShouldReturnCorrect()
+        public void EndOfFebNonLeapYearShouldReturnCorrect()
         {
             var month = "FEB";
             var year = "2021";

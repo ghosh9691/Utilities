@@ -26,7 +26,7 @@ namespace PrabalGhosh.Utilities
         public static long ToUnixEpoch(this DateTime value)
         {
             var result = value - DateTime.UnixEpoch;
-            return (long)result.TotalMilliseconds;
+            return (long) result.TotalMilliseconds;
         }
 
         public static DateTime GetMonthStart(this DateTime value, string month, string year, bool isUtc = true)
@@ -49,6 +49,7 @@ namespace PrabalGhosh.Utilities
                 return DateTime.MinValue;
             }
         }
+
         public static DateTime GetMonthEnd(this DateTime value, string month, string year, bool isUtc = true)
         {
             if ((month.Length != 3) && (year.Length != 4))

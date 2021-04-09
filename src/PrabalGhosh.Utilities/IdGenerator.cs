@@ -33,12 +33,12 @@ namespace PrabalGhosh.Utilities
 
             return string.Concat(
                 Enumerable
-                .Repeat(0, int.MaxValue)
-                .Select(e => RandomByte())
-                .Where(randomByte => randomByte < outOfRange)
-                .Take(length)
-                .Select(randomByte => alphabet[randomByte % alphabet.Length])
-                );
+                    .Repeat(0, int.MaxValue)
+                    .Select(e => RandomByte())
+                    .Where(randomByte => randomByte < outOfRange)
+                    .Take(length)
+                    .Select(randomByte => alphabet[randomByte % alphabet.Length])
+            );
         }
     }
 }

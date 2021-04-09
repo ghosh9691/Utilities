@@ -1,17 +1,19 @@
 using System;
 using NetTopologySuite.Geometries;
-using PyxisInt.GeographicLib;
 
 namespace PrabalGhosh.Utilities.Geographic
 {
+    /// <summary>
+    /// A GeographicLine represents a geodesic on the earth's surface as specified
+    /// by 2 geographic points - a 'Start' or an 'End'.
+    /// </summary>
     public class GeographicLine
     {
-        public GeographicPoint Start { get; set; }
-        public GeographicPoint End { get; set; }
+        private GeographicPoint Start { get; set; }
+        private GeographicPoint End { get; set; }
 
         public GeographicLine()
         {
-            
         }
 
         public GeographicLine(GeographicPoint start, GeographicPoint end)
@@ -31,44 +33,27 @@ namespace PrabalGhosh.Utilities.Geographic
             return Start.DistanceTo(End);
         }
 
-        public GeographicPoint Intersect(GeographicLine line)
+        public Intersection GetIntersection(GeographicLine line)
         {
-            var geod = Geodesic.WGS84;
-            var gn = new Gnomonic(geod);
-            //guess the intersection point...
-            var gc = line.GreatCircle();
-            var dist = gc.Distance / 2.0;
-            var intersection = line.Start.DestinationPoint(gc.InitialCourse, dist);
-            var latI = intersection.Latitude;
-            var lonI = intersection.Longitude;
-            ConsoleEx.WriteMessage($"Initial Guess: {latI}/{lonI}");
-            for (int i = 0; i < 10; i++)
+            var l1p1 = this.Start.ToSpherical();
+            var l1p2 = this.End.ToSpherical();
+            var l2p1 = line.Start.ToSpherical();
+            var l2p2 = line.End.ToSpherical();
+
+            var sphInt = SphericalPoint.SphericalIntersection(l1p1, l1p2, l2p1, l2p2);
+            if (sphInt.IsNotNull())
             {
-                var xa1 = gn.Forward(latI, lonI, line.Start.Latitude, line.Start.Longitude);
-                var xa2 = gn.Forward(latI, lonI, line.End.Latitude, line.End.Longitude);
-                var xb1 = gn.Forward(latI, lonI, this.Start.Latitude, this.Start.Longitude);
-                var xb2 = gn.Forward(latI, lonI, this.End.Latitude, this.End.Longitude);
-                var va1 = new Vector(xa1.x, xa1.y);
-                var va2 = new Vector(xa2.x, xa2.y);
-                var vb1 = new Vector(xb1.x, xb1.y);
-                var vb2 = new Vector(xb2.x, xb2.y);
-                var la = va1.Cross(va2);
-                var lb = vb1.Cross(vb2);
-                var p0 = la.Cross(lb);
-                p0.Norm();
-                var solved = gn.Reverse(latI, lonI, p0.X, p0.Y);
-                latI = solved.PointLatitude;
-                lonI = solved.PointLongitude;
-                ConsoleEx.WriteMessage($"Run {i}: Guessed {latI}/{lonI}");
+                if (sphInt.Distance > 0)
+                {
+                    //valid intersection was found!
+                    return new Intersection()
+                    {
+                        Distance = sphInt.Distance * 180.0/Math.PI * 60.0,
+                        Location = sphInt.SphericalLocation.ToGeographic()
+                    };
+                }
             }
 
-            var intPoint = new GeographicPoint(latI, lonI);
-            var gd1 = geod.Inverse(line.Start.Latitude, line.Start.Longitude, intPoint.Latitude, intPoint.Longitude);
-            var gd2 = geod.Inverse(intPoint.Latitude, intPoint.Longitude, line.End.Latitude, line.End.Longitude);
-            if (Math.Abs(gd1.FinalAzimuth - gd2.InitialAzimuth) <= 0.001)
-            {
-                return intPoint;
-            }
             return null;
         }
     }

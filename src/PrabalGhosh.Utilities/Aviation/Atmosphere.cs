@@ -9,7 +9,7 @@ namespace PrabalGhosh.Utilities.Aviation
         private const double StdLapseRate = 0.0019811;
         private const double CentigradeToKelvin = 273.15;
         private const double TroposphereBoundary = 36089.0;
-        private const double RhoAtSeaLevel = 2376.89;   //lb * sec2/ft4 or 0.00237689 slugs/ft3
+        private const double RhoAtSeaLevel = 2376.89; //lb * sec2/ft4 or 0.00237689 slugs/ft3
 
         /// <summary>
         /// Theta is the ratio of temperature at the specified altitude to the temperature at sea level in Kelvin
@@ -22,7 +22,7 @@ namespace PrabalGhosh.Utilities.Aviation
                 return 0.7519;
             else
             {
-                return ( StdSeaLevelTempInK - altitude * StdLapseRate / StdSeaLevelTempInK );
+                return (StdSeaLevelTempInK - altitude * StdLapseRate / StdSeaLevelTempInK);
             }
         }
 
@@ -150,12 +150,12 @@ namespace PrabalGhosh.Utilities.Aviation
         /// <param name="oat"></param>
         /// <param name="positionCorrection"></param>
         /// <returns></returns>
-        public static double TrueToIndicatedAirspeed(double tas, double altitude, 
+        public static double TrueToIndicatedAirspeed(double tas, double altitude,
             double oat, double positionCorrection)
         {
             return MachToIndicatedAirspeed(
-                TrueAirspeedToMach(tas, oat), 
-                altitude, 
+                TrueAirspeedToMach(tas, oat),
+                altitude,
                 positionCorrection);
         }
 
@@ -170,7 +170,7 @@ namespace PrabalGhosh.Utilities.Aviation
         public static double IndicatedToTrueAirspeed(double ias, double altitude, double oat, double positionCorrection)
         {
             return MachToTrueAirspeed(
-                IndicatedAirspeedToMach(ias, altitude, positionCorrection), 
+                IndicatedAirspeedToMach(ias, altitude, positionCorrection),
                 oat);
         }
 

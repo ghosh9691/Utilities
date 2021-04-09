@@ -6,6 +6,7 @@ namespace PrabalGhosh.Utilities.Enums
     {
         [Description("KG")]
         Kilogram,
+
         [Description("LB")]
         Pound
     }

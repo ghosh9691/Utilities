@@ -16,7 +16,7 @@ namespace PrabalGhosh.Utilities.Aviation
         public Airac(DateTime dateTime)
         {
             TimeSpan duration = dateTime - _epoch;
-            _cycles = (int)duration.TotalDays / DurationPerCycle;
+            _cycles = (int) duration.TotalDays / DurationPerCycle;
         }
 
         public Airac(string airacCycle)
@@ -74,6 +74,7 @@ namespace PrabalGhosh.Utilities.Aviation
             {
                 return false;
             }
+
             int cycle = Convert.ToInt32(airacCycle.Substring(2, 2));
             if ((cycle <= 0) || (cycle > 14))
                 return false;

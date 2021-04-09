@@ -54,7 +54,6 @@ namespace PrabalGhosh.Utilities
                 return null;
             var json = obj.ToJson();
             return Encoding.UTF8.GetBytes(json);
-
         }
 
         public static T FromByteArray<T>(this byte[] byteArray) where T : class

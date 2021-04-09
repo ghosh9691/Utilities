@@ -34,14 +34,8 @@ namespace PrabalGhosh.Utilities.Types
 
         public DateTime DateTime
         {
-            get
-            {
-                return GetDateTime();
-            }
-            set
-            {
-                SetDateTime(value);
-            }
+            get { return GetDateTime(); }
+            set { SetDateTime(value); }
         }
 
         public string TimeZone
@@ -57,6 +51,7 @@ namespace PrabalGhosh.Utilities.Types
             {
                 timeZones.Add(dtz.Id);
             }
+
             return timeZones;
         }
 
@@ -93,7 +88,8 @@ namespace PrabalGhosh.Utilities.Types
         {
             if (_timeZone.IsNotNull())
             {
-                LocalDateTime local = new LocalDateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour, _dateTime.Minute);
+                LocalDateTime local = new LocalDateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour,
+                    _dateTime.Minute);
                 ZonedDateTime zoned = local.InZoneStrictly(_timeZone);
                 DateTimeZone targetZoneInfo = DateTimeZoneProviders.Tzdb.GetZoneOrNull(targetZone);
                 if (targetZoneInfo.IsNotNull())
@@ -102,6 +98,7 @@ namespace PrabalGhosh.Utilities.Types
                     return targetZonedDateTime.ToDateTimeUnspecified();
                 }
             }
+
             return DateTimeOffset.MinValue.DateTime;
         }
 
@@ -114,11 +111,13 @@ namespace PrabalGhosh.Utilities.Types
         {
             if (_timeZone.IsNotNull())
             {
-                LocalDateTime local = new LocalDateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour, _dateTime.Minute);
+                LocalDateTime local = new LocalDateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour,
+                    _dateTime.Minute);
                 ZonedDateTime zoned = local.InZoneStrictly(_timeZone);
                 DateTimeZone targetZone = DateTimeZoneProviders.Tzdb.GetZoneOrNull("Etc/UTC");
                 return zoned.WithZone(targetZone).ToDateTimeUnspecified();
             }
+
             return DateTimeOffset.MinValue.DateTime;
         }
 
@@ -126,10 +125,12 @@ namespace PrabalGhosh.Utilities.Types
         {
             if ((_dateTime.IsNotNull()) && (_timeZone.IsNotNull()))
             {
-                LocalDateTime local = new LocalDateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour, _dateTime.Minute);
+                LocalDateTime local = new LocalDateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour,
+                    _dateTime.Minute);
                 ZonedDateTime zoned = local.InZoneStrictly(_timeZone);
                 return zoned.ToDateTimeUnspecified();
             }
+
             throw new ArgumentException("FlightDate is not initialized!");
         }
 

@@ -33,6 +33,7 @@ namespace PrabalGhosh.Utilities
                     return 0;
                 }
             }
+
             return 0;
         }
 
@@ -88,6 +89,7 @@ namespace PrabalGhosh.Utilities
             {
                 value += "=";
             }
+
             byte[] decoded = Convert.FromBase64String(value);
             return Encoding.UTF8.GetString(decoded);
         }
@@ -105,6 +107,7 @@ namespace PrabalGhosh.Utilities
                         return -magVar;
                     return magVar;
                 }
+
                 return 0.0;
             }
             catch (Exception)
@@ -170,7 +173,7 @@ namespace PrabalGhosh.Utilities
                 return null;
             }
         }
-        
+
         public static Int64 ToInt64(this string value)
         {
             try
@@ -240,6 +243,11 @@ namespace PrabalGhosh.Utilities
         public static string RemoveUnwantedCharacters(this string value, string allowedCharactersRegEx)
         {
             return Regex.Replace(value, allowedCharactersRegEx, string.Empty);
+        }
+
+        public static string RemoveSpecialCharacters(this string value)
+        {
+            return Regex.Replace(value, @"[^0-9a-zA-Z\.-_]", string.Empty);
         }
     }
 }

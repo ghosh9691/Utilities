@@ -10,6 +10,5 @@ namespace PrabalGhosh.Utilities
         {
             Results = new List<T>();
         }
-
     }
 }
