@@ -17,5 +17,15 @@ namespace PrabalGhosh.Utilities
             var destination = new GeographicPoint(dest);
             return origin.DistanceTo(destination);
         }
+        
+        public static GeographicLine GetLine(this Point value, Point to)
+        {
+            return new GeographicLine(value, to);
+        }
+
+        public static GeographicPoint GetPoint(this Point value)
+        {
+            return new GeographicPoint(value);
+        }
     }
 }
