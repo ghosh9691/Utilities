@@ -20,6 +20,7 @@ namespace PrabalGhosh.Utilities.Tests
         private readonly GeographicPoint _yvr = new GeographicPoint(49.19469722, -123.18396944);
         private readonly GeographicPoint _yyc = new GeographicPoint(51.12261389, -114.01334722);
         private readonly GeographicPoint _lax = new GeographicPoint(33.94249722, -118.40805 );
+        private readonly GeographicPoint _bos = new GeographicPoint(42.36294444, -71.00638889);
 
         [Fact]
         public void JfkToLhrShouldPass()
@@ -46,6 +47,13 @@ namespace PrabalGhosh.Utilities.Tests
             var line2 = new GeographicLine(_nrt, _lax);
             var intxn = line1.GetIntersection(line2);
             Assert.NotNull(intxn);
+        }
+
+        [Fact]
+        public void JfkToBosGreatCircleDistance()
+        {
+            var r = _jfk.DistanceTo(_bos);
+            Assert.NotNull(r);
         }
     }
 }

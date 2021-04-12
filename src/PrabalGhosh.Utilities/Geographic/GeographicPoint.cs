@@ -130,7 +130,7 @@ namespace PrabalGhosh.Utilities.Geographic
         public GeographicPoint GetDestinationPoint(double course, double distance)
         {
             course = course * Math.PI / 180.0;
-            distance = distance * 60.0 * Math.PI / 180.0;
+            distance = distance * Math.PI / 180.0 / 60.0;
             var dest = this.ToSpherical().SphericalDeadReckoning(course, distance);
             return dest.ToGeographic();
         }
