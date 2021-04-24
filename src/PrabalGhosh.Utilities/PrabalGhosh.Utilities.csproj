@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="GeoTimeZone" Version="4.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.5" />
     <PackageReference Include="NetTopologySuite" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NodaTime" Version="3.0.5" />
