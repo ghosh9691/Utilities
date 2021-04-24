@@ -1,16 +1,9 @@
-﻿using System;
-using NetTopologySuite;
-using NetTopologySuite.Geometries;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrabalGhosh.Utilities.Geographic;
-using Xunit;
 
 namespace PrabalGhosh.Utilities.Tests
 {
-    /// <summary>
-    /// The distance between 2 points are computed using Vincenty's formula
-    /// and is expressed in meters. For more details, see
-    /// https://en.wikipedia.org/wiki/Vincenty's_formulae
-    /// </summary>
+    [TestClass]
     public class GeographicPointTests
     {
         private readonly GeographicPoint _jfk = new GeographicPoint(40.63992778, -73.77869167);
@@ -22,38 +15,34 @@ namespace PrabalGhosh.Utilities.Tests
         private readonly GeographicPoint _lax = new GeographicPoint(33.94249722, -118.40805 );
         private readonly GeographicPoint _bos = new GeographicPoint(42.36294444, -71.00638889);
 
-        [Fact]
+        [TestMethod]
         public void JfkToLhrShouldPass()
         {
-            var r = _jfk.DistanceTo(_lhr);
-            var distInKm = r.ToKilometers();
-            Assert.True(Math.Abs(5545.49 - distInKm) <= 0.001);
-            var dr = _jfk.GetDestinationPoint(r.InitialCourse, r.Distance);
-            Assert.NotNull(dr);
+            var expected = 5545.49; //expected distance in kilometers
+            var gc = _jfk.DistanceTo(_lhr);
+            var actual = gc.ToKilometers();
+            Assert.AreEqual(expected, actual, 0.0001);
         }
 
-        [Fact]
+        [TestMethod]
         public void SydToYvrShouldPass()
         {
-            var r = _syd.DistanceTo(_yvr);
-            var disInKm = r.ToKilometers();
-            Assert.True(Math.Abs(12480.82 - disInKm) <= 0.001);
+            var expected = 12480.82;
+            var gc = _syd.DistanceTo(_yvr);
+            var actual = gc.ToKilometers();
+            Assert.AreEqual(expected, actual, 0.0001);
         }
 
-        [Fact]
+        [TestMethod]
         public void SydToYvrAndNrtToLaxShouldIntersect()
         {
             var line1 = new GeographicLine(_syd, _yvr);
             var line2 = new GeographicLine(_nrt, _lax);
-            var intxn = line1.GetIntersection(line2);
-            Assert.NotNull(intxn);
-        }
 
-        [Fact]
-        public void JfkToBosGreatCircleDistance()
-        {
-            var r = _jfk.DistanceTo(_bos);
-            Assert.NotNull(r);
+            var intxn = line1.GetIntersection(line2);
+            Assert.IsNotNull(intxn);
+            Assert.AreNotEqual(-1, intxn.Distance);
+            Assert.IsTrue(intxn.Distance > 0);
         }
     }
 }
