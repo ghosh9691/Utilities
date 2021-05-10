@@ -247,7 +247,7 @@ namespace PrabalGhosh.Utilities
 
         public static string RemoveSpecialCharacters(this string value)
         {
-            return Regex.Replace(value, @"[^0-9a-zA-Z\.-_]", string.Empty);
+            return Regex.Replace(value, @"[^0-9a-zA-Z-_.]", string.Empty);
         }
     }
 }
