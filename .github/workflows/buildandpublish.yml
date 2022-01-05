@@ -15,12 +15,12 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 5.0.x
     - name: Update Version Number
       uses: jacobtomlinson/gha-find-replace@2.0.0
       with:
         find: "<Version>2.0.1</Version>"
-        replace: "<Version>2.0${{ env.GITHUB_RUN_NUMBER }}</Version>"
+        replace: "<Version>2.0.${{ env.GITHUB_RUN_NUMBER }}</Version>"
         include: "**PrabalGhosh.Utilities.csproj"
     - name: Restore dependencies
       run: dotnet restore
