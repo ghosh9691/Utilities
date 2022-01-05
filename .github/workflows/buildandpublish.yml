@@ -7,15 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  version:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Set Version Number
-      uses: actions/checkout@v2
-      outputs:
-        latestVersion: "2.0.$GITHUB_RUN_NUMBER"
   build:
-    needs: version
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +20,7 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@2.0.0
       with:
         find: "<Version>2.0.1</Version>"
-        replace: "<Version>${{ needs.version.outputs.latestVersion }}</Version>"
+        replace: "<Version>2.0${{ $GITHUB_RUN_NUMBER }}</Version>"
         include: "**PrabalGhosh.Utilities.csproj"
     - name: Restore dependencies
       run: dotnet restore
