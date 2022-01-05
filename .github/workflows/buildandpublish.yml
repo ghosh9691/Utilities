@@ -1,0 +1,30 @@
+name: Build And Publish Utilities
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build PrabalGhosh.Utilities
+      run: dotnet build --no-restore
+    - name: Test PrabalGhosh.Utilities
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish PrabalGhosh.Utilities
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        - PROJECT_FILE_PATH: src/PrabalGhosh.Utilities/PrabalGhosh.Utilities.csproj
+        - NUGET_KEY:${{secrets.NUGET_API_KEY}}
