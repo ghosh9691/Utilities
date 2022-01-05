@@ -24,7 +24,7 @@ jobs:
     - name: Test PrabalGhosh.Utilities
       run: dotnet test --no-build --verbosity normal
     - name: Generate Version Number
-      run: echo "<Version>2.0.$GITHUB_RUN_NUMBER<Version>" > version.txt
+      run: echo "<Version>2.0.$GITHUB_RUN_NUMBER</Version>" > version.txt
     - name: Publish PrabalGhosh.Utilities
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
