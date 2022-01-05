@@ -16,20 +16,22 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
+    - name: Update Version Number
+      uses: jacobtomlinson/gha-find-replace@2.0.0
+      with:
+        find: "<Version>2.0.1</Version>"
+        replace: "<Version>2.0.$GITHUB_RUN_NUMBER</Version>"
+        include: "**PrabalGhosh.Utilities.csproj"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build PrabalGhosh.Utilities
       run: dotnet build --no-restore
     - name: Test PrabalGhosh.Utilities
       run: dotnet test --no-build --verbosity normal
-    - name: Generate Version Number
-      run: echo "<Version>2.0.$GITHUB_RUN_NUMBER</Version>" > version.txt
     - name: Publish PrabalGhosh.Utilities
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/PrabalGhosh.Utilities/PrabalGhosh.Utilities.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-        VERSION_FILE_PATH: ./version.txt
-        VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
         
