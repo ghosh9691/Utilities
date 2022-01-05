@@ -31,5 +31,5 @@ jobs:
         PROJECT_FILE_PATH: src/PrabalGhosh.Utilities/PrabalGhosh.Utilities.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         VERSION_FILE_PATH: ./version.txt
-        VERSION_REGEX: <Version>(.*)<\/Version>
+        VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
         
