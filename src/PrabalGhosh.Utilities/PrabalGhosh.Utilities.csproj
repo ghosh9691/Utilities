@@ -21,5 +21,7 @@
     <PackageReference Include="System.Security.Cryptography.Csp" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
   </ItemGroup>
-
+  <PropertyGroup>
+    <Version>2.0.1</Version>
+  </PropertyGroup>
 </Project>
