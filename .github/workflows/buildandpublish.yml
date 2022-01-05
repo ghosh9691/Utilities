@@ -24,10 +24,12 @@ jobs:
     - name: Test PrabalGhosh.Utilities
       run: dotnet test --no-build --verbosity normal
     - name: Generate Version Number
-      run: echo "version is 2.0.$GITHUB_RUN_NUMBER"
+      run: echo "<Version>2.0.$GITHUB_RUN_NUMBER<Version>" > version.txt
     - name: Publish PrabalGhosh.Utilities
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/PrabalGhosh.Utilities/PrabalGhosh.Utilities.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-        VERSION_STATIC: 2.0.0
+        VERSION_FILE_PATH: ./version.txt
+        VERSION_REGEX: <Version>(.*)<\/Version>
+        
