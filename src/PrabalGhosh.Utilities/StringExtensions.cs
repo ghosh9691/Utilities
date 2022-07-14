@@ -4,6 +4,8 @@ using System.Security.Cryptography;
 using System.Text;
 using PrabalGhosh.Utilities.Aviation;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
+using System.Linq;
 
 namespace PrabalGhosh.Utilities
 {
@@ -294,6 +296,30 @@ namespace PrabalGhosh.Utilities
             {
                 return false;
             }
+        }
+
+        public static string GetDescription<T>(this T e) where T : IConvertible
+        {
+            if (e is Enum)
+            {
+                Type type = e.GetType();
+                Array values = System.Enum.GetValues(type);
+                foreach (int val in values)
+                {
+                    if (val == e.ToInt32(CultureInfo.InvariantCulture))
+                    {
+                        var memInfo = type.GetMember(type.GetEnumName(val));
+                        var descriptionAttribute = memInfo[0]
+                            .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                            .FirstOrDefault() as DescriptionAttribute;
+                        if (descriptionAttribute != null)
+                        {
+                            return descriptionAttribute.Description;
+                        }
+                    }
+                }
+            }
+            return string.Empty;
         }
     }
 }
