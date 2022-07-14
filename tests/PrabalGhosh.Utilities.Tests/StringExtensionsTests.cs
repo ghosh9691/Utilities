@@ -10,8 +10,8 @@ namespace PrabalGhosh.Utilities.Tests
         public void TestEnumGetDescription()
         {
             var expected = "IAS";
-            var speedUnit = SpeedUnits.Indicated;
-            var result = speedUnit.GetDescription<SpeedUnits>();
+            var speedUnit = SpeedTypes.Indicated;
+            var result = speedUnit.GetDescription<SpeedTypes>();
             Assert.IsNotNull(result);
             Assert.AreEqual(expected, result, false, "SpeedUnit description is not what was expected!");
         }    

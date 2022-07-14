@@ -4,10 +4,13 @@ namespace PrabalGhosh.Utilities.Enums
 {
     public enum SpeedUnits
     {
-        [Description("IAS")]
-        Indicated,
+        [Description("N")]
+        Knots,
 
-        [Description("TAS")]
-        True
+        [Description("M")]
+        Mach,
+
+        [Description("K")]
+        Kmph
     }
 }
