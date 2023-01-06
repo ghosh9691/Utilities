@@ -27,7 +27,7 @@ jobs:
     - name: Test PrabalGhosh.Utilities
       run: dotnet test --no-build --verbosity normal
     - name: Publish PrabalGhosh.Utilities
-      uses: brandedoutcast/publish-nuget@v2.5.5
+      uses: brandedoutcast/publish-nuget@v2.8.0
       with:
         PROJECT_FILE_PATH: src/PrabalGhosh.Utilities/PrabalGhosh.Utilities.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
