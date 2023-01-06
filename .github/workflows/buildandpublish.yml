@@ -3,8 +3,6 @@ name: Build And Publish Utilities
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -15,7 +13,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 7.0.x
     - name: Update Version Number
       uses: jacobtomlinson/gha-find-replace@2.0.0
       with:
