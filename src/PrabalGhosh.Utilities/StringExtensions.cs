@@ -6,6 +6,7 @@ using PrabalGhosh.Utilities.Aviation;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.Linq;
+using Konscious.Security.Cryptography;
 
 namespace PrabalGhosh.Utilities
 {
@@ -119,6 +120,7 @@ namespace PrabalGhosh.Utilities
             }
         }
 
+        [Obsolete("Use GetSecureHash() instead...")]
         public static string GetHash(this string value)
         {
             using (var sha = SHA256.Create())
@@ -128,6 +130,7 @@ namespace PrabalGhosh.Utilities
             }
         }
 
+        [Obsolete("Use GetSecureHash() instead...")]
         public static string GetHash(this string value, string salt)
         {
             using (var sha = SHA256.Create())
@@ -135,6 +138,22 @@ namespace PrabalGhosh.Utilities
                 byte[] hashed = sha.ComputeHash(Encoding.UTF8.GetBytes(value + salt));
                 return BitConverter.ToString(hashed).Replace("-", "");
             }
+        }
+        
+        public static byte[] CreateRandomSalt()
+        {
+            return RandomNumberGenerator.GetBytes(16);
+        }
+
+        public static string GetSecureHash(this string value, byte[] salt)
+        {
+            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(value));
+            argon2.Salt = salt;
+            argon2.DegreeOfParallelism = 8;
+            argon2.Iterations = 40;
+            argon2.MemorySize = 8192;   //in KiB
+            var result = argon2.GetBytes(128);
+            return Convert.ToBase64String(result);
         }
 
         public static bool IsEmpty(this string value)

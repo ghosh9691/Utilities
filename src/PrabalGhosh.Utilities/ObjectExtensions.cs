@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -66,5 +67,6 @@ namespace PrabalGhosh.Utilities
             var jsonString = Encoding.UTF8.GetString(byteArray);
             return JsonConvert.DeserializeObject<T>(jsonString);
         }
+
     }
 }
