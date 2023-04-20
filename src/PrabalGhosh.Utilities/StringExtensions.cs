@@ -140,10 +140,6 @@ namespace PrabalGhosh.Utilities
             }
         }
         
-        public static byte[] CreateRandomSalt()
-        {
-            return RandomNumberGenerator.GetBytes(16);
-        }
 
         public static string GetSecureHash(this string value, byte[] salt)
         {

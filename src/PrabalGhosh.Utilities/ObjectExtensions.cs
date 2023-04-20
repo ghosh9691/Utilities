@@ -68,5 +68,9 @@ namespace PrabalGhosh.Utilities
             return JsonConvert.DeserializeObject<T>(jsonString);
         }
 
+        public static byte[] CreateRandomSalt(this object obj)
+        {
+            return RandomNumberGenerator.GetBytes(16);
+        }
     }
 }
