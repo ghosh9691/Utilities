@@ -148,7 +148,7 @@ namespace PrabalGhosh.Utilities
             argon2.DegreeOfParallelism = 8;
             argon2.Iterations = 40;
             argon2.MemorySize = 8192;   //in KiB
-            var result = argon2.GetBytes(128);
+            var result = argon2.GetBytes(64);   //512-bit hash
             return Convert.ToBase64String(result);
         }
 
