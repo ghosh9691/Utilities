@@ -152,6 +152,13 @@ namespace PrabalGhosh.Utilities
             return Convert.ToBase64String(result);
         }
 
+        public static string GetSecureHash(this string value, string salt)
+        {
+            byte[] saltBytes = Convert.FromBase64String(salt);
+            return GetSecureHash(value, saltBytes);
+        }
+        
+
         public static bool IsEmpty(this string value)
         {
             return string.IsNullOrEmpty(value);

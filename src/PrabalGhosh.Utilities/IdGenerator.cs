@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace PrabalGhosh.Utilities
@@ -39,6 +40,17 @@ namespace PrabalGhosh.Utilities
                     .Take(length)
                     .Select(randomByte => alphabet[randomByte % alphabet.Length])
             );
+        }
+
+        public static string GenerateSalt(int size = 16)
+        {
+            byte[] saltBytes = new byte[size];
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(saltBytes);
+            }
+
+            return Convert.ToBase64String(saltBytes);
         }
     }
 }
