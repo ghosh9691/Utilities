@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
@@ -342,6 +343,11 @@ namespace PrabalGhosh.Utilities
                 }
             }
             return string.Empty;
+        }
+
+        public static bool IsInList(this string value, List<string> knownValues)
+        {
+            return knownValues.Any(k => string.Equals(k, value, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

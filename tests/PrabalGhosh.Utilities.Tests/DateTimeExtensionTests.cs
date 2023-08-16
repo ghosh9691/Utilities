@@ -1,6 +1,5 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrabalGhosh.Utilities.Aviation;
 
 namespace PrabalGhosh.Utilities.Tests
 {
