@@ -349,5 +349,11 @@ namespace PrabalGhosh.Utilities
         {
             return knownValues.Any(k => string.Equals(k, value, StringComparison.OrdinalIgnoreCase));
         }
+
+        public static bool IsAlphaNumeric(this string value)
+        {
+            var pattern = "^[a-zA-Z0-9]*$";
+            return Regex.IsMatch(value, pattern);
+        }
     }
 }
