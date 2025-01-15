@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PrabalGhosh.Utilities
 {
@@ -23,6 +24,12 @@ namespace PrabalGhosh.Utilities
             return result;
         }
 
+        public static async Task<PagedResult<T>> GetPagedAsync<T>(this IQueryable<T> query,
+            int page, int pageSize) where T : class
+        {
+            return await Task.Run(() => GetPaged<T>(query, page, pageSize));
+        }
+
         public static PagedResult<T> GetPaged<T>(this IEnumerable<T> query,
             int page, int pageSize) where T : class
         {
@@ -38,6 +45,12 @@ namespace PrabalGhosh.Utilities
             result.Results = query.Skip(skip).Take(pageSize).ToList();
 
             return result;
+        }
+        
+        public static async Task<PagedResult<T>> GetPagedAsync<T>(this IEnumerable<T> query,
+            int page, int pageSize) where T : class
+        {
+            return await Task.Run(() => GetPaged<T>(query, page, pageSize));
         }
     }
 }
